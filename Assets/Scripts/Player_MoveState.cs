@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 //Player的移动状态
-public class Player_MoveState : PlayerState
+public class Player_MoveState : Player_GroundState
 {
     public Player_MoveState(string stateName, StateMachine stateMachine, Entity entity) : base(stateName, stateMachine, entity)
     {
@@ -21,9 +21,8 @@ public class Player_MoveState : PlayerState
             return;
         }
 
-        //处理水平翻转
-        if ((player.isRight && player.moveInput.x < 0) || (!player.isRight && player.moveInput.x > 0))
-            player.Flip();
+        //处理水平转向
+        player.SetFlip();
 
         //设置速度
         rb.velocity = new Vector2(player.moveInput.x * player.moveSpeed, rb.velocity.y);

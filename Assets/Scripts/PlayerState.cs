@@ -10,4 +10,12 @@ public class PlayerState : BaseState
     {
         player=(Player)entity;
     }
+
+    public override void Update()
+    {
+        base.Update();
+
+        //实时的改变YVelocity参数 控制Player Jump Fall这个动画BlendTree
+        animator.SetFloat("YVelocity", rb.velocity.y);
+    }
 }

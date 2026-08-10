@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 //PlayerµÄ¿ÕÏÐ×´Ì¬
-public class Player_IdleState : PlayerState
+public class Player_IdleState : Player_GroundState
 {
     public Player_IdleState(string stateName, StateMachine stateMachine, Entity entity) : base(stateName, stateMachine, entity)
     {
