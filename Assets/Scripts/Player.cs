@@ -5,11 +5,12 @@ using UnityEngine;
 public class Player : Entity
 {
     private PlayerInputSet playerInputSet; //输入配置文件
-    private Vector2 moveInput; //移动的输入
+    public Vector2 moveInput; //移动的输入
 
 
     //Player的所有状态
-    private Player_IdleState idleState; //空闲状态
+    public Player_IdleState IdleState { get; private set; } //空闲状态
+    public Player_MoveState MoveState { get; private set; } //移动状态
 
     protected override void Awake()
     {
@@ -32,7 +33,11 @@ public class Player : Entity
         });
 
         //初始化所有的状态
-        idleState = new Player_IdleState("Player_Idle",stateMachine,this);
+        IdleState = new Player_IdleState("Idle",stateMachine,this);
+        MoveState=new Player_MoveState("Move",stateMachine,this);
+        moveSpeed = 5f; //水平速度
+        isRight = true; //默认不翻转 也就是朝右
+
     }
 
     private void OnEnable()
@@ -44,7 +49,7 @@ public class Player : Entity
     private void Start()
     {
         //初始化状态机的初始状态
-        stateMachine.Init(idleState);
+        stateMachine.Init(IdleState);
     }
 
     private void OnDisable()
@@ -53,4 +58,10 @@ public class Player : Entity
         playerInputSet.Disable();
     }
 
+    //水平翻转的函数
+    public void Flip()
+    {
+        isRight=isRight?false:true;
+        transform.Rotate(Vector2.up, 180,Space.World);
+    }
 }
