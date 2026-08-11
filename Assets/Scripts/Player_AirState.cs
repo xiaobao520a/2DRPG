@@ -14,6 +14,12 @@ public class Player_AirState : PlayerState
     {
         base.Update();
 
+        //如果在空中的时候检测到了墙 并且是朝着墙的方向移动
+        if(player.isWall&&((player.moveInput.x>0&&player.isRight)||(player.moveInput.x < 0 && !player.isRight)))
+        {
+            stateMachine.ChangeState(player.WallSlideState);
+            return;
+        }
         //在空中的时候应该都能转向
         player.SetFlip();
 

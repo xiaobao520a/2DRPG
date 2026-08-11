@@ -21,6 +21,13 @@ public class Player_MoveState : Player_GroundState
             return;
         }
 
+        //如果移动的过程中撞墙了 方向也与墙一致 就切换回idle
+        if(player.isWall&&((player.isRight&&player.moveInput.x>0)||(!player.isRight&&player.moveInput.x<0)))
+        {
+            stateMachine.ChangeState(player.IdleState);
+            return;
+        }
+
         //处理水平转向
         player.SetFlip();
 

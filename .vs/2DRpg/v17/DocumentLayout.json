@@ -7,24 +7,36 @@
       "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player_airstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\player_movestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player_movestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\player_groundstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player_groundstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\player_fallstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player_fallstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\player_jumpstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player_jumpstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\player_fallstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player_fallstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\player_walljumpstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player_walljumpstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\player_wallslidestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player_wallslidestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\scriptableobject\\playerdataso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\scriptableobject\\playerdataso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\player_idlestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player_idlestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\player_movestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player_movestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,76 +46,114 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 9,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Player_MoveState.cs",
-              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_MoveState.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Player_MoveState.cs",
-              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_MoveState.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Player_MoveState.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAA2wBgAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-10T14:08:28.796Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Player_GroundState.cs",
-              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_GroundState.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Player_GroundState.cs",
-              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_GroundState.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Player_GroundState.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-10T14:14:45.352Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Player.cs",
-              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Player.cs",
-              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Player.cs",
-              "ViewState": "AQIAAEkAAAAAAAAAAAAlwFoAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-10T14:13:04.999Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Player_JumpState.cs",
-              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_JumpState.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Player_JumpState.cs",
-              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_JumpState.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Player_JumpState.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-10T14:09:56.043Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Player_FallState.cs",
               "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_FallState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player_FallState.cs",
               "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_FallState.cs",
               "RelativeToolTip": "Assets\\Scripts\\Player_FallState.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABUAAAAAAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-10T14:04:55.077Z",
+              "WhenOpened": "2026-08-11T03:23:59.521Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Player_JumpState.cs",
+              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_JumpState.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player_JumpState.cs",
+              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_JumpState.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player_JumpState.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAA2wAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T03:12:03.756Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Player_WallJumpState.cs",
+              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_WallJumpState.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player_WallJumpState.cs",
+              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_WallJumpState.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player_WallJumpState.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAqwBQAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T03:04:38.382Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Player_IdleState.cs",
+              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_IdleState.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player_IdleState.cs",
+              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_IdleState.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player_IdleState.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAA2wBgAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T02:55:12.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Player_MoveState.cs",
+              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_MoveState.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player_MoveState.cs",
+              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_MoveState.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player_MoveState.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAmwBgAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T02:53:14.634Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlayerDataSO.cs",
+              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\ScriptableObject\\PlayerDataSO.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ScriptableObject\\PlayerDataSO.cs",
+              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\ScriptableObject\\PlayerDataSO.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ScriptableObject\\PlayerDataSO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T02:35:36.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Player_WallSlideState.cs",
+              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_WallSlideState.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player_WallSlideState.cs",
+              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_WallSlideState.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player_WallSlideState.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAACEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T02:31:57.366Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Player.cs",
+              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player.cs",
+              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAAqwD0AAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T02:30:59.701Z",
               "EditorCaption": ""
             },
             {
@@ -114,9 +164,9 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player_AirState.cs",
               "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player_AirState.cs",
               "RelativeToolTip": "Assets\\Scripts\\Player_AirState.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAswAwAAAAhAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAmwBYAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-10T13:37:33.984Z",
+              "WhenOpened": "2026-08-11T02:28:15.307Z",
               "EditorCaption": ""
             }
           ]

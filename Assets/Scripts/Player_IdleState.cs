@@ -22,6 +22,10 @@ public class Player_IdleState : Player_GroundState
     {
         base.Update();
 
+        //检测是否在墙边并且往墙的方向移动 这样的话就不进入moveState 保持Idle 防止动画一直闪烁
+        if (player.isWall && ((player.isRight && player.moveInput.x > 0) || (!player.isRight && player.moveInput.x < 0)))
+            return;
+
         //检测是否在移动
         if (player.moveInput.x != 0)
         {
