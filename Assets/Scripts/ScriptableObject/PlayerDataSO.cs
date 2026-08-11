@@ -12,5 +12,7 @@ public class PlayerDataSO : ScriptableObject
     public float inWall_multiplier = 0.7f;//墙壁滑动状态 竖直速度的乘积 不按s前的滑动速度会稍微慢一些
     public float wallSlideSpeed=5f; //墙壁滑动状态的速度
     public Vector2 wallJumpForce=new Vector2(5f,5f); //墙壁跳跃的力
+    public float dashSpeed = 5f; //冲刺的速度
+    public float dashTime = 0.5f; //冲刺能持续的时间
 
 }

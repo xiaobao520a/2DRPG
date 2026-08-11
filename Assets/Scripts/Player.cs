@@ -14,6 +14,8 @@ public class Player : Entity
     public float wallSlideSpeed; //墙壁滑动状态的速度
     public float inWall_Multiplier; //墙壁滑动状态 竖直速度的乘积 不按s前的滑动速度会稍微慢一些
     public Vector2 wallJumpForce; //墙壁跳跃的力
+    public float dashSpeed; //冲刺的速度
+    public float dashTime; //冲刺能持续的时间
 
     //Player的所有状态
     public Player_IdleState IdleState { get; private set; } //空闲状态
@@ -21,8 +23,8 @@ public class Player : Entity
     public Player_JumpState JumpState { get; private set; } //跳跃状态
     public Player_FallState FallState { get; private set; } //下降状态
     public Player_WallSlideState WallSlideState { get; private set; } //墙壁滑动状态
-
     public Player_WallJumpState WallJumpState { get; private set; } //墙壁跳跃状态
+    public Player_DashState DashState { get; private set; } //冲刺状态
 
 
     protected override void Awake()
@@ -39,6 +41,8 @@ public class Player : Entity
         wallSlideSpeed = playerDataSO.wallSlideSpeed;
         inWall_Multiplier = playerDataSO.inWall_multiplier;
         wallJumpForce= playerDataSO.wallJumpForce;
+        dashSpeed = playerDataSO.dashSpeed;
+        dashTime = playerDataSO.dashTime;
 
         //开启各种输入的监听 这里我加的是Lambda 所以如果频繁的失活激活其实会加很多监听函数
         //但是我的Player不会这样 所以我就暂时写在OnEnable了 也可以直接写在Awake或者Start就不存在这个问题
@@ -60,6 +64,7 @@ public class Player : Entity
         FallState = new Player_FallState("JumpFall", stateMachine, this);
         WallSlideState = new Player_WallSlideState("WallSlide", stateMachine, this);
         WallJumpState = new Player_WallJumpState("WallJump", stateMachine, this);
+        DashState = new Player_DashState("Dash", stateMachine, this);
     }
 
     private void OnEnable()

@@ -9,7 +9,8 @@ public abstract class BaseState
     protected StateMachine stateMachine; //控制该状态的状态机
     protected Entity entity; //该状态属于的 具体的实体(Player Enemy...)
     protected Animator animator; //entity的Animator组件
-    protected Rigidbody2D rb; 
+    protected Rigidbody2D rb; //rigidBody2D组件
+    protected float timer; //状态的计时器 需要的时候 需要的状态自己赋值去管理
 
     public BaseState(string stateName, StateMachine stateMachine,Entity entity)
     {
