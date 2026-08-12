@@ -27,6 +27,8 @@ public abstract class BaseState
     {
         //进入的时候就开启该状态的动画
         animator.SetBool(stateName, true);
+        //同时重置timer
+        timer = 0f;
     }
 
     //处于该状态 的函数
@@ -39,6 +41,12 @@ public abstract class BaseState
     {
         //退出的时候就退出该状态的动画
         animator.SetBool(stateName, false);
+    }
+
+    //动画事件回调（子类按需重写）
+    public virtual void OnAnimationEvent(string eventName)
+    {
+
     }
 
 }

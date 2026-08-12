@@ -44,7 +44,14 @@ public class EventCenter
             eventDic.Add(type, listener);
     }
 
-    //
+    //有参添加监听
+    public void AddListener<T>(E_EventType type,Action<T>listener)
+    {
+        if( eventDic.ContainsKey(type))
+            eventDic[type] = Delegate.Combine(eventDic[type],listener);
+        else
+            eventDic.Add(type, listener);
+    }
 
     //无参 对应事件退订的方法
     public void RemoveListener(E_EventType type,Action listener)
@@ -56,6 +63,17 @@ public class EventCenter
 
             //如果删除后 这个事件没有任何订阅了 就直接删除
             if (eventDic[type]==null)
+                eventDic.Remove(type);
+        }
+    }
+
+    //有参 退订方法
+    public void RemoveListener<T>(E_EventType type,Action<T>listener)
+    {
+        if (eventDic.ContainsKey(type))
+        {
+            eventDic[type]=Delegate.Remove(eventDic[type],listener);
+            if(eventDic[type]==null)
                 eventDic.Remove(type);
         }
     }

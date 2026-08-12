@@ -19,5 +19,12 @@ public class Player_GroundState : PlayerState
             stateMachine.ChangeState(player.JumpState);
             return;
         }
+
+        //每帧检测是否按下攻击键 按下就进入普攻状态
+        if (player.playerInputSet.Player.BasicAttack.WasPressedThisFrame())
+        {
+            stateMachine.ChangeState(player.BasicAttackState);
+            return;
+        }
     }
 }

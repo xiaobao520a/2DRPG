@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 //实体 Player Enemy等 的基类
-public abstract class Entity:MonoBehaviour
+public abstract class Entity:MonoBehaviour,IAnimationEventReceiver
 {
     //都存在的组件
     protected StateMachine stateMachine;
@@ -51,6 +52,12 @@ public abstract class Entity:MonoBehaviour
     {
         //初始化一开始角色的朝向 是right还是left
         InitFlip();
+    }
+
+    //实现这个动画事件的接口 默认没有行为 子类需要就自行重写
+    public virtual void OnAnimationEvent(string eventName)
+    {
+
     }
 
     private void DetectGround()

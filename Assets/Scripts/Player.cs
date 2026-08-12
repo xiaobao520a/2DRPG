@@ -14,8 +14,16 @@ public class Player : Entity
     public float wallSlideSpeed; //墙壁滑动状态的速度
     public float inWall_Multiplier; //墙壁滑动状态 竖直速度的乘积 不按s前的滑动速度会稍微慢一些
     public Vector2 wallJumpForce; //墙壁跳跃的力
+
+    //冲刺相关
     public float dashSpeed; //冲刺的速度
     public float dashTime; //冲刺能持续的时间
+
+    //普攻相关
+    public int basicAttackCount; //普攻有几段
+    public float basicAttack_TimeWindow; //检测攻击键输入的最大时间 这段时间内输入就继续攻击 否则就退出攻击状态
+    public List<Vector2> basicAttack_Velocity; //每段普攻进行的小幅度位移 的速度数组
+
 
     //Player的所有状态
     public Player_IdleState IdleState { get; private set; } //空闲状态
@@ -25,6 +33,7 @@ public class Player : Entity
     public Player_WallSlideState WallSlideState { get; private set; } //墙壁滑动状态
     public Player_WallJumpState WallJumpState { get; private set; } //墙壁跳跃状态
     public Player_DashState DashState { get; private set; } //冲刺状态
+    public Player_BasicAttackState BasicAttackState { get; private set; } //普攻状态
 
 
     protected override void Awake()
@@ -36,13 +45,16 @@ public class Player : Entity
 
         //初始化变量 从PlayerDataSO配置文件中去读取
         jumpForce = playerDataSO.jumpForce;
-        moveSpeed = playerDataSO.moveSpeed; //水平速度
+        moveSpeed = playerDataSO.moveSpeed; 
         inAir_Multiplier = playerDataSO.inAir_Multiplier;
         wallSlideSpeed = playerDataSO.wallSlideSpeed;
         inWall_Multiplier = playerDataSO.inWall_multiplier;
         wallJumpForce= playerDataSO.wallJumpForce;
         dashSpeed = playerDataSO.dashSpeed;
         dashTime = playerDataSO.dashTime;
+        basicAttackCount = playerDataSO.basicAttackCount;
+        basicAttack_TimeWindow=playerDataSO.basicAttack_TimeWindow;
+        basicAttack_Velocity = playerDataSO.basicAttack_Velocity;
 
         //开启各种输入的监听 这里我加的是Lambda 所以如果频繁的失活激活其实会加很多监听函数
         //但是我的Player不会这样 所以我就暂时写在OnEnable了 也可以直接写在Awake或者Start就不存在这个问题
@@ -65,6 +77,7 @@ public class Player : Entity
         WallSlideState = new Player_WallSlideState("WallSlide", stateMachine, this);
         WallJumpState = new Player_WallJumpState("WallJump", stateMachine, this);
         DashState = new Player_DashState("Dash", stateMachine, this);
+        BasicAttackState = new Player_BasicAttackState("BasicAttack", stateMachine, this);
     }
 
     private void OnEnable()
@@ -83,16 +96,18 @@ public class Player : Entity
     protected override void Update()
     {
         base.Update();
-
-        
-       
     }
+
     private void OnDisable()
     {
         //禁用输入
         playerInputSet.Disable();
     }
 
+    public override void OnAnimationEvent(string eventName)
+    {
+        stateMachine.CurrentState?.OnAnimationEvent(eventName);
+    }
     //水平翻转的函数
     public void SetFlip()
     {
@@ -104,4 +119,6 @@ public class Player : Entity
         }
 
     }
+
+   
 }

@@ -37,4 +37,8 @@ public class Player_MoveState : Player_GroundState
         
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+    }
 }

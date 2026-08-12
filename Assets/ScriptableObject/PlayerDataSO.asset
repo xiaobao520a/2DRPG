@@ -17,3 +17,6 @@ MonoBehaviour:
   moveSpeed: 5
   inWall_multiplier: 0.7
   wallSlideSpeed: 3
+  wallJumpForce: {x: 5, y: 5}
+  dashSpeed: 8
+  dashTime: 0.3
