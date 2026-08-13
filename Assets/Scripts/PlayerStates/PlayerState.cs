@@ -18,8 +18,19 @@ public class PlayerState : BaseState
         //实时的改变YVelocity参数 控制Player Jump Fall这个动画BlendTree
         animator.SetFloat("YVelocity", rb.velocity.y);
 
+        //如果dash在cd 那就等cd好之后 canDash再变为true
+        if(!player.canDash)
+        {
+            player.dashTimer += Time.deltaTime;
+            if(player.dashTimer>=player.dashCD)
+            {
+                player.canDash = true;
+                player.dashTimer = 0f;
+            }
+        }
+
         //Player的所有状态都应该去检测是否dash 如果按下了dash键并且当前状态不是dash状态
-        if(player.playerInputSet.Player.Dash.WasPressedThisFrame()&&stateMachine.CurrentState!=player.DashState)
+        if(player.playerInputSet.Player.Dash.WasPressedThisFrame()&&stateMachine.CurrentState!=player.DashState&&player.canDash)
         {
             stateMachine.ChangeState(player.DashState);
             return;

@@ -34,6 +34,13 @@ public class Player_DashState : PlayerState
 
 
         timer -= Time.deltaTime;
+        //如果冲到一半发现冲到了墙上 那就进入wallSlideState
+        if (player.isWall)
+        {
+            stateMachine.ChangeState(player.WallSlideState);
+            return;
+        }
+
         if (timer <= 0)
         {
             //如果此时Player在地上 就变成idlestate
@@ -60,7 +67,7 @@ public class Player_DashState : PlayerState
         //退出的时候恢复rb的重力
         rb.gravityScale=originalGravityScale;
 
-        timer = 0;
-
+        //要等冷却时间过了之后才能继续dash
+        player.canDash = false;
     }
 }

@@ -18,13 +18,13 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver
 
     //检测相关 地面检测 墙壁检测
     public bool isGround; //是否触地
-    [SerializeField]private float groundDetect_Distance; //地面检测距中心点的距离
-    [SerializeField] private LayerMask groundLayer; //地面层
+    public float groundDetect_Distance; //地面检测距中心点的距离
+    public LayerMask groundLayer; //地面层
 
     //墙壁检测 有上下两个检测点 更精准 Wall也用Ground地面层
-    [SerializeField] private Transform topWallDetect_Transform;
-    [SerializeField] private Transform bottomWallDetect_Transform;
-    [SerializeField] private float wallDetect_Distance; //墙壁检测的距离
+    public Transform topWallDetect_Transform;
+    public Transform bottomWallDetect_Transform;
+    public float wallDetect_Distance; //墙壁检测的距离
     public bool isWall; //是否检测到墙壁
 
     //初始化变量 组件
@@ -60,7 +60,7 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver
 
     }
 
-    private void DetectGround()
+    protected virtual void DetectGround()
     {
         if(Physics2D.Raycast(transform.position,Vector2.down,groundDetect_Distance,groundLayer))
             isGround = true;
@@ -68,7 +68,7 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver
             isGround = false;
     }
 
-    private void DetectWall()
+    protected virtual void DetectWall()
     {
         //两层墙壁检测都成功的时候 isWall才是true
         if(Physics2D.Raycast(topWallDetect_Transform.position,isRight?Vector2.right:Vector2.left,wallDetect_Distance,groundLayer)
@@ -84,6 +84,12 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver
             isRight = true;
         else
             isRight = false;
+    }
+
+    public virtual void SetFlip()
+    {
+        isRight = isRight ? false : true;
+        transform.Rotate(Vector3.up, 180, Space.World);
     }
 
     //画出地面检测和墙壁检测的线 方便观察调试

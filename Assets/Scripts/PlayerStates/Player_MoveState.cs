@@ -28,6 +28,13 @@ public class Player_MoveState : Player_GroundState
             return;
         }
 
+        //如果走到空中 就切换成FallState
+        if(!player.isGround)
+        {
+            stateMachine.ChangeState(player.FallState);
+            return;
+        }
+
         //处理水平转向
         player.SetFlip();
 

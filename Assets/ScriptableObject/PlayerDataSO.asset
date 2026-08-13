@@ -12,11 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8468e7589d5f7c342a8bc447deb40cb3, type: 3}
   m_Name: PlayerDataSO
   m_EditorClassIdentifier: 
-  jumpForce: 8
+  jumpForce: 15
   inAir_Multiplier: 0.8
-  moveSpeed: 5
-  inWall_multiplier: 0.7
+  moveSpeed: 8
+  inWall_multiplier: 0.4
   wallSlideSpeed: 3
-  wallJumpForce: {x: 5, y: 5}
-  dashSpeed: 8
-  dashTime: 0.3
+  wallJumpForce: {x: 10, y: 13}
+  wallJumpTime: 0.3
+  dashSpeed: 20
+  dashTime: 0.25
+  dashCD: 0.5
+  basicAttackCount: 3
+  basicAttack_TimeWindow: 0.2
+  basicAttack_Velocity:
+  - {x: 3, y: 1.5}
+  - {x: 1, y: 2.5}
+  - {x: 5, y: 2.5}

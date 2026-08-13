@@ -12,7 +12,7 @@ public class Player_WallJumpState : PlayerState
     {
         //重写一下Enter的逻辑 因为Animator里没有这个WallJump的animation 直接复用JumpFall的就行
         animator.SetBool("JumpFall", true);
-
+        timer = 0;
         rb.velocity = new Vector2(player.wallJumpForce.x * (player.isRight ? -1 : 1), player.wallJumpForce.y);
     }
 
@@ -23,14 +23,12 @@ public class Player_WallJumpState : PlayerState
         //可以转向
         player.SetFlip();
 
-        //如果竖直速度开始向下 就切换成FallState
-        if(rb.velocity.y<0)
+        timer += Time.deltaTime;
+        if(timer>player.wallJumpTime)
         {
             stateMachine.ChangeState(player.FallState);
             return;
         }
-
-
     }
 
     //重写Exit的逻辑 让它改Animator的参数JumpFall 这里主要是为了wallJump的时候dash animator能正常切换

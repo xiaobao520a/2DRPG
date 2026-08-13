@@ -1,0 +1,29 @@
+[33mcommit 2186a360d7af803adcc55d333d57cc674ce4095a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: bao <1901713887@qq.com>
+Date:   Tue Aug 11 18:44:01 2026 +0800
+
+    新增了player的Dash状态 把之前的状态都很好的连接起来了 同时开始写eventCenter和专门管理所有动画事件的脚本 去方便解耦
+
+[33mcommit 7bf7660c5dcccb8334ebbeeb5a6c4209420791a0[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: bao <1901713887@qq.com>
+Date:   Tue Aug 11 11:32:00 2026 +0800
+
+    引入了SO配置文件去配置PlayerData Player加入了WallSlide和WallJump这两个状态 同时修复了一点BUG
+
+[33mcommit e335b7b10eb7b7636690019180e80f2d2fc6b46a[m
+Author: bao <1901713887@qq.com>
+Date:   Mon Aug 10 22:34:21 2026 +0800
+
+    完成了Player的Jump Fall 以及创建了两个超状态Ground和AirState 修了下BUG
+
+[33mcommit 5ab7a8227b450286140f9e75a5cd7098ace13880[m
+Author: bao <1901713887@qq.com>
+Date:   Mon Aug 10 17:06:47 2026 +0800
+
+    完成了Player的Idle Move Flip
+
+[33mcommit ed70cee400961202e03e1fc6a740c0b8eb0e23ad[m
+Author: bao <1901713887@qq.com>
+Date:   Mon Aug 10 12:57:10 2026 +0800
+
+    项目初始化：搭建 FSM 和输入系统
