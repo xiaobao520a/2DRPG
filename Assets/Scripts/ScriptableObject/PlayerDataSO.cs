@@ -22,17 +22,22 @@ public class PlayerDataSO : ScriptableObject
     public float dashTime = 0.5f; //冲刺能持续的时间
     public float dashCD = 1f; //冲刺的冷却时间
 
-    [Header("普攻相关")]
+    [Header("战斗相关")]
+    public float nowHp; //当前hp
+    public float maxHp; //最大hp
+
     public int basicAttackCount = 3; //普攻有几段
     public float basicAttack_TimeWindow = 0.2f; //检测攻击键输入的最大时间 这段时间内输入就继续攻击 否则就退出攻击状态
     public List<Vector2> basicAttack_Velocity = new List<Vector2>() //每段普攻进行的小幅度位移 的速度数组
     {
         new Vector2(3,1.5f),new Vector2(1,2.5f),new Vector2(2.75f,1.75f)
     };
-
-
-
-
+    public float basicAttack_velocityTimeWindow = 0.3f; //每段攻击添加速度的时间 防止滑动太多 手感不好
+    public float attackDamage=10f; //普攻伤害
+    public float attackRadius = 1.5f; //攻击的半径
+    public float attackAngle = 120; //扇形的角度
+    public Vector2 attackOffset = new Vector2(1f,0);
+    public Vector2 knockBackForce = new Vector2(3f,2f); //击退力
 
 
 

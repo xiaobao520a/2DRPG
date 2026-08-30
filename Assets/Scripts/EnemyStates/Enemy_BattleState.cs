@@ -41,27 +41,37 @@ public class Enemy_BattleState : EnemyState
         //计算距离和方向
         CalculateDistanceAndDirection();
 
-        //如果距离到攻击范围并且冷却时间到了 就攻击 同时计算一下需不需要转身之类的
-        if(distance<=enemy.attackDistance&&attackCDTimer>enemy.attackCD)
+        //面向玩家：先转身再攻击/追踪。加死区，避免玩家和敌人x几乎重合时每帧反复转身（原地鬼畜）
+        float dx = enemy.player.transform.position.x - enemy.transform.position.x;
+        if (Mathf.Abs(dx) > 0.2f)
         {
             if ((direction == 1 && !enemy.isRight) || (direction == -1 && enemy.isRight))
                 enemy.SetFlip();
+        }
 
+        //如果距离到攻击范围并且冷却时间到了 就攻击 同时计算一下需不需要转身之类的
+        if (distance<=enemy.attackDistance&&attackCDTimer>enemy.attackCD)
+        {
             stateMachine.ChangeState(enemy.attackState);
             return;
         }
 
         //追踪Player
-        TrackPlayer();
+        if (Mathf.Abs(dx) > 0.2f)
+            rb.velocity = new Vector2(enemy.battleSpeed * direction, rb.velocity.y);
+        else
+            rb.velocity = new Vector2(0, rb.velocity.y);
+
+        //TrackPlayer();
     }
 
-    private void TrackPlayer()
-    {
-        if ((direction == 1 && !enemy.isRight) || (direction == -1 && enemy.isRight))
-            enemy.SetFlip();
+    //private void TrackPlayer()
+    //{
+    //    if ((direction == 1 && !enemy.isRight) || (direction == -1 && enemy.isRight))
+    //        enemy.SetFlip();
 
-        rb.velocity = new Vector2(enemy.battleSpeed*direction, rb.velocity.y);
-    }
+    //    rb.velocity = new Vector2(enemy.battleSpeed*direction, rb.velocity.y);
+    //}
 
     //计算Player和Enemy的距离和方向
     private void CalculateDistanceAndDirection()

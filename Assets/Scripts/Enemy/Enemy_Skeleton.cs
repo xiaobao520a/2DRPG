@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy_Skeleton : Enemy
 {
+    [Header("配置文件")]
     public Enemy_SkeletonDataSO enemy_SkeletonDataSO;
 
     protected override void Awake()
@@ -16,6 +17,7 @@ public class Enemy_Skeleton : Enemy
         moveState = new Enemy_MoveState("Move", stateMachine, this);
         attackState = new Enemy_AttackState("Attack", stateMachine, this);
         battleState = new Enemy_BattleState("Battle", stateMachine, this);
+        dieState = new Enemy_DieState("Die", stateMachine, this);
 
         //初始化变量
         idleTime = enemy_SkeletonDataSO.idleTime;
@@ -26,5 +28,20 @@ public class Enemy_Skeleton : Enemy
         attackDistance=enemy_SkeletonDataSO.attackDistance;
         battleSpeed=enemy_SkeletonDataSO.battleSpeed;
         attackCD=enemy_SkeletonDataSO.attackCD;
+        nowHp=enemy_SkeletonDataSO.nowHp;
+        maxHp=enemy_SkeletonDataSO.maxHp;
+        isDead = false;
+        attackDamage=enemy_SkeletonDataSO.attackDamage;
+        attackRadius=enemy_SkeletonDataSO.attackRadius;
+        attackAngle=enemy_SkeletonDataSO.attackAngle;
+        attackOffset=enemy_SkeletonDataSO.attackOffset;
+        knockBackForce=enemy_SkeletonDataSO.knockBackForce;
+    }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3((isRight ? 1 : -1) * attackDistance, 0, 0));
+
     }
 }

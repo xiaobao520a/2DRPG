@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 30409736}
   - component: {fileID: 30409738}
   - component: {fileID: 30409737}
+  - component: {fileID: 30409739}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -259,6 +260,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &30409739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30409735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e20d0103763ce442a2d86ed8614c3eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &153170402
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +286,7 @@ GameObject:
   - component: {fileID: 153170407}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -287,7 +300,7 @@ Transform:
   m_GameObject: {fileID: 153170402}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.36, y: -1.43, z: 0}
+  m_LocalPosition: {x: 8.39, y: 6.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -381,6 +394,9 @@ MonoBehaviour:
   bottomWallDetect_Transform: {fileID: 20200716}
   wallDetect_Distance: 0.37
   isWall: 0
+  nowHp: 0
+  maxHp: 0
+  isDead: 0
   playerDataSO: {fileID: 11400000, guid: ad98fdb9a25762941936e02b6b953a32, type: 2}
   moveInput: {x: 0, y: 0}
   jumpForce: 0
@@ -397,6 +413,15 @@ MonoBehaviour:
   basicAttackCount: 0
   basicAttack_TimeWindow: 0
   basicAttack_Velocity: []
+  basicAttack_velocityTimeWindow: 0
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  attackRadius: 1.5
+  attackAngle: 120
+  attackOffset: {x: 1, y: 0}
+  knockBackForce: {x: 3, y: 2}
+  attackDamage: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +528,7 @@ GameObject:
   - component: {fileID: 535843900}
   m_Layer: 7
   m_Name: Enemy_Skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -521,7 +546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  isRight: 0
+  isRight: 1
   isGround: 0
   groundDetect_Distance: 1.39
   groundLayer:
@@ -529,8 +554,29 @@ MonoBehaviour:
     m_Bits: 8
   topWallDetect_Transform: {fileID: 1574002223}
   bottomWallDetect_Transform: {fileID: 1362583374}
-  wallDetect_Distance: 0.37
+  wallDetect_Distance: 0.4
   isWall: 0
+  nowHp: 0
+  maxHp: 0
+  isDead: 0
+  idleTime: 0
+  moveAnimSpeedMultiplier: 1
+  groundDetect_offsetX: 1.1
+  detectPlayer_Distance: 10
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  player: {fileID: 0}
+  maxBattleTime: 0
+  battleSpeed: 0
+  attackDistance: 0
+  attackRadius: 0
+  attackAngle: 0
+  attackOffset: {x: 0, y: 0}
+  knockBackForce: {x: 0, y: 0}
+  attackCD: 0
+  attackDamage: 0
+  enemy_SkeletonDataSO: {fileID: 11400000, guid: d3b9ae1ffe34a7c4e838016b27f06d53, type: 2}
 --- !u!70 &535843901
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -602,7 +648,7 @@ Transform:
   m_GameObject: {fileID: 535843899}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.37, y: -1.501, z: 0.048173025}
+  m_LocalPosition: {x: -7.25, y: -1.501, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -735,7 +781,7 @@ Transform:
   m_GameObject: {fileID: 737130842}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 11.39, y: 0.69, z: 0}
+  m_LocalPosition: {x: 8.66, y: 0.69, z: 0}
   m_LocalScale: {x: 7.2225595, y: 4.3689895, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -766,7 +812,7 @@ Transform:
   m_GameObject: {fileID: 1362583373}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.727, z: 0}
+  m_LocalPosition: {x: 0.12, y: -0.727, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -927,7 +973,7 @@ Transform:
   m_GameObject: {fileID: 1574002222}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.269, z: 0}
+  m_LocalPosition: {x: 0.12, y: 0.269, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

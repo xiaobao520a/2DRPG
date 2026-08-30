@@ -4,7 +4,9 @@ using System.Xml.Serialization;
 using UnityEngine;
 
 //实体 Player Enemy等 的基类
-public abstract class Entity:MonoBehaviour,IAnimationEventReceiver
+//继承了动画事件interface 如果动画某一帧需要执行什么函数逻辑 那么就继承这个接口重写具体方法
+//继承了接口IDamageable 可破坏 可受伤害 实现TakeDamage函数
+public abstract class Entity:MonoBehaviour,IAnimationEventReceiver,IDamageable
 {
     //都存在的组件
     protected StateMachine stateMachine;
@@ -13,9 +15,11 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver
 
     //都需要的变量
     //物理 运动相关
+    [Header("通用移动/翻转")]
     public float moveSpeed; //移动速度
     public bool isRight; //翻转相关
 
+    [Header("监测相关")]
     //检测相关 地面检测 墙壁检测
     public bool isGround; //是否触地
     public float groundDetect_Distance; //地面检测距中心点的距离
@@ -26,6 +30,13 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver
     public Transform bottomWallDetect_Transform;
     public float wallDetect_Distance; //墙壁检测的距离
     public bool isWall; //是否检测到墙壁
+
+    [Header("战斗相关")]
+    public float nowHp; //当前hp
+    public float maxHp; //最大hp
+    public bool isDead; //是否死亡
+
+
 
     //初始化变量 组件
     protected virtual void Awake()
@@ -60,6 +71,15 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver
 
     }
 
+    public virtual void TakeDamage(AttackHitData hitData)
+    {
+
+    }
+
+    //死亡的方法
+    public virtual void Die()
+    {
+    }
     protected virtual void DetectGround()
     {
         if(Physics2D.Raycast(transform.position,Vector2.down,groundDetect_Distance,groundLayer))

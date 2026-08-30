@@ -21,10 +21,18 @@ MonoBehaviour:
   wallJumpTime: 0.3
   dashSpeed: 20
   dashTime: 0.25
-  dashCD: 0.5
+  dashCD: 0.3
+  nowHp: 100
+  maxHp: 100
   basicAttackCount: 3
   basicAttack_TimeWindow: 0.2
   basicAttack_Velocity:
   - {x: 3, y: 1.5}
   - {x: 1, y: 2.5}
   - {x: 5, y: 2.5}
+  basicAttack_velocityTimeWindow: 0.3
+  attackDamage: 10
+  attackRadius: 1.2
+  attackAngle: 120
+  attackOffset: {x: 0.5, y: 0}
+  knockBackForce: {x: 3, y: 2}

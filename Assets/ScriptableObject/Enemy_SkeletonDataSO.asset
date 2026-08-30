@@ -13,3 +13,16 @@ MonoBehaviour:
   m_Name: Enemy_SkeletonDataSO
   m_EditorClassIdentifier: 
   idleTime: 2
+  moveSpeed: 5
+  nowHp: 100
+  maxHp: 100
+  detectPlayer_Distance: 10
+  maxBattleTime: 2
+  battleSpeed: 6
+  attackDistance: 2
+  attackCD: 0.2
+  attackRadius: 1
+  attackAngle: 120
+  attackOffset: {x: 1.4, y: 0}
+  knockBackForce: {x: 3, y: 2}
+  attackDamage: 10

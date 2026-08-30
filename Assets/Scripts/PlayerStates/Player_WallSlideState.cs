@@ -19,17 +19,18 @@ public class Player_WallSlideState : PlayerState
             return;
         }
 
-        //如果在墙上滑行的时候 按下了相反的AD键 就进入FallState 
-        if ((player.isRight && player.moveInput.x < 0) || (!player.isRight && player.moveInput.x > 0))
-        {
-            stateMachine.ChangeState(player.FallState);
-            return;
-        }
-
         //如果在墙上滑行的时候按下了跳跃键 就进入WallJumpState
         if(player.playerInputSet.Player.Jump.WasPressedThisFrame())
         {
             stateMachine.ChangeState(player.WallJumpState);
+            return;
+        }
+
+        //如果在墙上滑行的时候 按下了相反的AD键 就进入FallState 
+        if ((player.isRight && player.moveInput.x < 0) || (!player.isRight && player.moveInput.x > 0))
+        {
+
+            stateMachine.ChangeState(player.FallState);
             return;
         }
 
