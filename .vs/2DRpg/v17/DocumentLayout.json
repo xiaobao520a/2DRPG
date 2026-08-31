@@ -3,36 +3,12 @@
   "WorkspaceRootPath": "D:\\GameCode\\Project\\2DRpg\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\vfxmgr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\vfxmgr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\playerstates\\player_idlestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerstates\\player_idlestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\enemystates\\enemy_diestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemystates\\enemy_diestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\data\\attackhitdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\data\\attackhitdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\playerstates\\player_basicattackstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerstates\\player_basicattackstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\enemystates\\enemy_attackstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemystates\\enemy_attackstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\enemy\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\enemystates\\enemy_battlestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemystates\\enemy_battlestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|d:\\gamecode\\project\\2drpg\\assets\\scripts\\eventcenter\\e_eventtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{472153D0-AEF0-D622-B8B2-DC266173DBFD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\eventcenter\\e_eventtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,114 +18,36 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Player_IdleState.cs",
-              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\PlayerStates\\Player_IdleState.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerStates\\Player_IdleState.cs",
-              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\PlayerStates\\Player_IdleState.cs",
-              "RelativeToolTip": "Assets\\Scripts\\PlayerStates\\Player_IdleState.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAgwBgAAAAbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T07:49:36.292Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Enemy_BattleState.cs",
-              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\EnemyStates\\Enemy_BattleState.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyStates\\Enemy_BattleState.cs",
-              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\EnemyStates\\Enemy_BattleState.cs",
-              "RelativeToolTip": "Assets\\Scripts\\EnemyStates\\Enemy_BattleState.cs",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAgwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T07:46:47.392Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Enemy_DieState.cs",
-              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\EnemyStates\\Enemy_DieState.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyStates\\Enemy_DieState.cs",
-              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\EnemyStates\\Enemy_DieState.cs",
-              "RelativeToolTip": "Assets\\Scripts\\EnemyStates\\Enemy_DieState.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAswAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T07:46:40.205Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AttackHitData.cs",
-              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Data\\AttackHitData.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Data\\AttackHitData.cs",
-              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Data\\AttackHitData.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Data\\AttackHitData.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T07:36:59.838Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Player_BasicAttackState.cs",
-              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\PlayerStates\\Player_BasicAttackState.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerStates\\Player_BasicAttackState.cs",
-              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\PlayerStates\\Player_BasicAttackState.cs",
-              "RelativeToolTip": "Assets\\Scripts\\PlayerStates\\Player_BasicAttackState.cs",
-              "ViewState": "AQIAAFAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 1,
+              "Title": "E_EventType.cs",
+              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\EventCenter\\E_EventType.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\EventCenter\\E_EventType.cs",
+              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\EventCenter\\E_EventType.cs",
+              "RelativeToolTip": "Assets\\Scripts\\EventCenter\\E_EventType.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T07:33:10.416Z",
+              "WhenOpened": "2026-08-31T00:37:33.047Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Player.cs",
-              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Player.cs",
-              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Player.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Player.cs",
-              "ViewState": "AQIAAKgAAAAAAAAAAAAAAKMAAAAjAAAA",
+              "Title": "VFXMgr.cs",
+              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\VFXMgr.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\VFXMgr.cs",
+              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\VFXMgr.cs",
+              "RelativeToolTip": "Assets\\Scripts\\VFXMgr.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAAACgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T07:26:07.403Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Enemy.cs",
-              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Enemy\\Enemy.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\Enemy.cs",
-              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\Enemy\\Enemy.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Enemy\\Enemy.cs",
-              "ViewState": "AQIAAFIAAAAAAAAAAAAAAFMAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T07:25:15.81Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Enemy_AttackState.cs",
-              "DocumentMoniker": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\EnemyStates\\Enemy_AttackState.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyStates\\Enemy_AttackState.cs",
-              "ToolTip": "D:\\GameCode\\Project\\2DRpg\\Assets\\Scripts\\EnemyStates\\Enemy_AttackState.cs",
-              "RelativeToolTip": "Assets\\Scripts\\EnemyStates\\Enemy_AttackState.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAACKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T07:23:59.056Z",
+              "WhenOpened": "2026-08-31T00:16:45.749Z",
               "EditorCaption": ""
             }
           ]
