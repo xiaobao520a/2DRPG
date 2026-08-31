@@ -37,7 +37,9 @@ public class PlayerDataSO : ScriptableObject
     public float attackRadius = 1.5f; //攻击的半径
     public float attackAngle = 120; //扇形的角度
     public Vector2 attackOffset = new Vector2(1f,0);
-    public Vector2 knockBackForce = new Vector2(3f,2f); //击退力
+    public Vector2 knockBackForce = new Vector2(3f,2f);
+    public float knockBackDeceleration = 12f; //击退速度的衰减速率 防止被击退后一直滑动
+ //击退力
 
 
 

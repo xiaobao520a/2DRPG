@@ -36,6 +36,8 @@ public class Player : Entity
     public Vector2 attackOffset; //攻击检测点的偏移量
     public Vector2 knockBackForce; //击退力
     public float attackDamage;
+    public float knockBackDeceleration; //击退速度的衰减速率 防止被击退后一直滑动
+
 
     //Player的所有状态
     public Player_IdleState IdleState { get; private set; } //空闲状态
@@ -78,6 +80,8 @@ public class Player : Entity
         attackAngle= playerDataSO.attackAngle;
         attackOffset= playerDataSO.attackOffset;
         knockBackForce = playerDataSO.knockBackForce;
+        knockBackDeceleration = playerDataSO.knockBackDeceleration;
+
 
 
         canDash = true;
@@ -168,21 +172,19 @@ public class Player : Entity
     public override void TakeDamage(AttackHitData hitData)
     {
         if (isDead) return;
+
         nowHp -= hitData.damage;
-
-        //击退方向由攻击方决定（knockBackDirection: 1=向右 -1=向左），只翻转X，保持Y不变
-        rb.velocity = new Vector2(hitData.knockBackDirection * hitData.knockBackForce.x, hitData.knockBackForce.y);
-        ////播放受击特效 交给VFXManager处理
-        //EventCenter.Instance.Broadcast(E_EventType.PlayVFX, new VFXData
-        //{
-        //    type = E_VFXType.PlayerHit,
-        //    position = transform.position,
-        //    direction = new Vector2(hitData.knockBackDirection, 0)
-        //});
-
+        //播放受伤特效
+        EventCenter.Instance.Broadcast<Entity>(E_EventType.PlayerHurt, this);
         if (nowHp <= 0)
         {
             Die();
+            return;
         }
+        //击退方向由攻击方决定（knockBackDirection: 1=向右 -1=向左），只翻转X，保持Y不变
+        rb.velocity = new Vector2(hitData.knockBackDirection * hitData.knockBackForce.x, hitData.knockBackForce.y);
+
+        
+        
     }
 }

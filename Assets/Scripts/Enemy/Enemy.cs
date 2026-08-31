@@ -92,20 +92,20 @@ public abstract class Enemy : Entity
 
         nowHp -= hitData.damage;
 
-        rb.velocity = new Vector2(hitData.knockBackDirection * hitData.knockBackForce.x, hitData.knockBackForce.y);
-        ////播放受击特效 交给VFXManager处理
-        //EventCenter.Instance.Broadcast(E_EventType.PlayVFX, new VFXData
-        //{
-        //    type = E_VFXType.EnemyHit,
-        //    position = transform.position,
-        //    direction = new Vector2(hitData.knockBackDirection, 0)
-        //});
-
+        //播放受伤特效
+        EventCenter.Instance.Broadcast<Entity>(E_EventType.EnemyHurt, this);
         if (nowHp <= 0)
+        {
             Die();
+            return;
+        }
+
+        rb.velocity = new Vector2(hitData.knockBackDirection * hitData.knockBackForce.x, hitData.knockBackForce.y);
+
+        
 
         //被攻击之后 如果并不处于战斗状态这之类的 就进入战斗battleState
-        if(stateMachine.CurrentState!=attackState &&stateMachine.CurrentState!=battleState
+        if (stateMachine.CurrentState!=attackState &&stateMachine.CurrentState!=battleState
             &&stateMachine.CurrentState!=dieState)
         {
             player=(Player)hitData.hitEntity;
