@@ -9,6 +9,10 @@ public class Player : Entity
     [Header("配置文件")]
     public PlayerDataSO playerDataSO; //玩家相关变量的配置文件
 
+    [Header("层级相关")]
+    public LayerMask enemyLayer; //敌人的层级
+    public LayerMask chestLayer; //箱子的层级
+
     [Header("移动/跳跃/滑动相关")]
     public Vector2 moveInput; //移动的输入
     public float jumpForce; //跳跃力
@@ -30,7 +34,6 @@ public class Player : Entity
     public float basicAttack_TimeWindow; //检测攻击键输入的最大时间 这段时间内输入就继续攻击 否则就退出攻击状态
     public List<Vector2> basicAttack_Velocity; //每段普攻进行的小幅度位移 的速度数组
     public float basicAttack_velocityTimeWindow; //每段攻击添加速度的时间 防止滑动太多 手感不好
-    public LayerMask enemyLayer; //敌人的层级
     public float attackRadius;//攻击的半径
     public float attackAngle;//扇形的角度
     public Vector2 attackOffset; //攻击检测点的偏移量

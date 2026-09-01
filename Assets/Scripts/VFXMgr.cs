@@ -22,12 +22,14 @@ public class VFXMgr : MonoBehaviour
     {
         EventCenter.Instance.AddListener<Entity>(E_EventType.PlayerHurt, PlayDamageVFX);
         EventCenter.Instance.AddListener<Entity>(E_EventType.EnemyHurt, PlayDamageVFX);
+        EventCenter.Instance.AddListener<Chest>(E_EventType.ChestOpen, PlayDamageVFX);
     }
 
     private void OnDisable()
     {
         EventCenter.Instance.RemoveListener<Entity>(E_EventType.PlayerHurt, PlayDamageVFX);
         EventCenter.Instance.RemoveListener<Entity>(E_EventType.EnemyHurt, PlayDamageVFX);
+        EventCenter.Instance.RemoveListener<Chest>(E_EventType.ChestOpen, PlayDamageVFX);
     }
 
     [Header("受伤视觉特效相关")]
@@ -55,6 +57,21 @@ public class VFXMgr : MonoBehaviour
         StartCoroutine(PlayDamageVFX_Coroutine(sr, originalMaterial));
     }
 
+    //播放受伤时的视觉特效(箱子用) 重载
+    public void PlayDamageVFX(Chest chest)
+    {
+        if (chest == null || onDamage_VFXMaterial == null) return;
+
+        SpriteRenderer sr = chest.GetComponentInChildren<SpriteRenderer>();
+        if (sr == null) return;
+
+        //这个渲染器正在闪 忽略这次 防止抓到伤害材质导致卡死
+        if (flashingSet.Contains(sr)) return;
+
+        flashingSet.Add(sr);
+        Material originalMaterial = sr.material;
+        StartCoroutine(PlayDamageVFX_Coroutine(sr, originalMaterial));
+    }
     IEnumerator PlayDamageVFX_Coroutine(SpriteRenderer sr, Material originalMaterial)
     {
         sr.material = onDamage_VFXMaterial;

@@ -7,4 +7,5 @@ public enum E_EventType
 {
    PlayerHurt, //玩家受伤 参数Entity
    EnemyHurt, //敌人受伤 参数Entity
+   ChestOpen, //箱子打开 参数Chest
 }

@@ -74,7 +74,7 @@ public class Player_BasicAttackState : PlayerState
         {
             case "BasicAttackHit":
                 Vector2 startPoint = (Vector2)player.transform.position + player.attackOffset*(player.isRight?1:-1);
-                colliders = Physics2D.OverlapCircleAll(startPoint, player.attackRadius, player.enemyLayer);
+                colliders = Physics2D.OverlapCircleAll(startPoint, player.attackRadius, player.enemyLayer|player.chestLayer);
 
                 AttackHitData hitData = new AttackHitData
                 {
@@ -95,7 +95,7 @@ public class Player_BasicAttackState : PlayerState
                     //»÷ÖÐÄ¿±ê
                     else
                     {
-                        collider.GetComponent<IDamageable>().TakeDamage(hitData);
+                        collider.GetComponent<IDamageable>()?.TakeDamage(hitData);
                     }
                 }
                 break;
