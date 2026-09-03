@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Parry",
+                    "type": "Button",
+                    "id": "bd4e8124-1bf7-483a-b31c-898d55121481",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -291,6 +300,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7a20dd1-2f5a-4e79-8ad3-8db0e91b499c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Parry",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : Entity
+public abstract class Enemy : Entity,ICountered
 {
     //Enemy的通用状态
     public Enemy_IdleState idleState;
@@ -10,6 +10,7 @@ public abstract class Enemy : Entity
     public Enemy_AttackState attackState;
     public Enemy_BattleState battleState;
     public Enemy_DieState dieState;
+    public Enemy_StunnedState stunnedState;
 
     //Enemy的通用变量
     public float idleTime; //idle状态持续的时间
@@ -35,6 +36,9 @@ public abstract class Enemy : Entity
     public float attackCD; //攻击的CD 攻击一次后等待一段时间才能再次攻击
     public float attackDamage; //普攻伤害
 
+    [Header("击晕/反击相关")]
+    public float stunnedDuration; //击晕的时间
+    public bool CanBeCountered { get; set; }
 
     protected override void Start()
     {
@@ -112,5 +116,18 @@ public abstract class Enemy : Entity
             stateMachine.ChangeState(battleState);
         }
 
+    }
+
+    //敌人被反击的具体逻辑
+    public virtual void Countered(AttackHitData hitData)
+    {
+        //受伤
+        TakeDamage(hitData);
+
+        //如果直接弹死了 就别stun了 直接return
+        if (isDead) return;
+        //默认直接进入StunnedState
+        stateMachine.ChangeState(stunnedState);
+        return;
     }
 }

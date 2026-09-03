@@ -26,5 +26,12 @@ public class Player_GroundState : PlayerState
             stateMachine.ChangeState(player.BasicAttackState);
             return;
         }
+
+        //每帧检测是否按下格挡键 按下就进入格挡状态
+        if (player.playerInputSet.Player.Parry.WasPerformedThisFrame())
+        {
+            stateMachine.ChangeState(player.ParryState);
+            return;
+        }
     }
 }

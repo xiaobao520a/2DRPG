@@ -36,3 +36,11 @@ MonoBehaviour:
   attackAngle: 120
   attackOffset: {x: 0.5, y: 0}
   knockBackForce: {x: 3, y: 2}
+  knockBackDeceleration: 12
+  parryDuration: 0.5
+  parryDetect_Radius: 1.2
+  parryDetect_Offset: {x: 0.5, y: 0}
+  parryDetect_Angle: 120
+  counterDamage: 50
+  counterKnockBackForce: {x: 5, y: 4}
+  counterDuration: 0.2

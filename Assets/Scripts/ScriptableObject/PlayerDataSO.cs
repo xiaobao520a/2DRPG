@@ -39,7 +39,16 @@ public class PlayerDataSO : ScriptableObject
     public Vector2 attackOffset = new Vector2(1f,0);
     public Vector2 knockBackForce = new Vector2(3f,2f);
     public float knockBackDeceleration = 12f; //击退速度的衰减速率 防止被击退后一直滑动
- //击退力
+                                              //击退力
+
+    [Header("格挡/弹反相关")]
+    public float parryDuration; //格挡状态持续的时间
+    public float parryDetect_Radius; //格挡检测的半径
+    public Vector2 parryDetect_Offset; //格挡检测点的偏移
+    public float parryDetect_Angle; //格挡检测的角度
+    public float counterDamage; //反击伤害
+    public Vector2 counterKnockBackForce; //反击击退力
+    public float counterDuration; //反击持续时间
 
 
 

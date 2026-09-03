@@ -18,6 +18,8 @@ public class Enemy_Skeleton : Enemy
         attackState = new Enemy_AttackState("Attack", stateMachine, this);
         battleState = new Enemy_BattleState("Battle", stateMachine, this);
         dieState = new Enemy_DieState("Die", stateMachine, this);
+        stunnedState = new Enemy_StunnedState("Stunned", stateMachine, this);
+        
 
         //初始化变量
         idleTime = enemy_SkeletonDataSO.idleTime;
@@ -36,8 +38,15 @@ public class Enemy_Skeleton : Enemy
         attackAngle=enemy_SkeletonDataSO.attackAngle;
         attackOffset=enemy_SkeletonDataSO.attackOffset;
         knockBackForce=enemy_SkeletonDataSO.knockBackForce;
+        stunnedDuration=enemy_SkeletonDataSO.stunnedDuration;
     }
 
+    protected override void Update()
+    {
+        base.Update();
+
+        
+    }
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();

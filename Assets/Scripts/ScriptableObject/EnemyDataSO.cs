@@ -25,6 +25,9 @@ public class EnemyDataSO : ScriptableObject
     public Vector2 knockBackForce = new Vector2(3f, 2f); //击退力
     public float attackDamage = 10f; //普攻伤害
 
+    [Header("击晕相关")]
+    public float stunnedDuration; //击晕的时间
+    public float stunnedVelocity; //被击晕后的水平速度
 
 
 }

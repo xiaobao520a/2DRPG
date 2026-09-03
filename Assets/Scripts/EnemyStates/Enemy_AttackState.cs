@@ -44,10 +44,33 @@ public class Enemy_AttackState : EnemyState
                 }
                 break;
 
-                //如果结束的时候发现还能砍到player 那就继续砍
+                //攻击警报开始 也就是player可以反击的窗口开始
+            case "Enemy_Skeleton_AttackAlertBegin":
+                //此时敌人可以被击晕 反击窗口打开 打开!特效
+                enemy.CanBeCountered = true;
+                EventCenter.Instance.Broadcast<bool>(E_EventType.Enemy_AttackAlertBegin, true);
+                    break;
+
+            //攻击警报结束 也就是player可以反击的窗口开始
+            case "Enemy_Skeleton_AttackAlertEnd":
+                //此时敌人不可以被击晕 反击窗口关闭 关闭!特效
+                enemy.CanBeCountered= false;
+                EventCenter.Instance.Broadcast<bool>(E_EventType.Enemy_AttackAlertEnd, false);
+                break;
+
+            //如果结束的时候发现还能砍到player 那就继续砍
             case "Enemy_Skeleton_AttackEnd":
                     stateMachine.ChangeState(enemy.battleState);
                 break;
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        //退出的时候也要隐藏! 防止被弹反的时候还没到End窗口 同时关掉弹反窗口 以防万一
+        EventCenter.Instance.Broadcast<bool>(E_EventType.Enemy_AttackAlertEnd, false);
+        enemy.CanBeCountered = false;
     }
 }

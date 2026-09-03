@@ -71,6 +71,15 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Parry"",
+                    ""type"": ""Button"",
+                    ""id"": ""bd4e8124-1bf7-483a-b31c-898d55121481"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -313,6 +322,17 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7a20dd1-2f5a-4e79-8ad3-8db0e91b499c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Parry"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -905,6 +925,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         m_Player_BasicAttack = m_Player.FindAction("BasicAttack", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_Parry = m_Player.FindAction("Parry", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -989,6 +1010,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_BasicAttack;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_Parry;
     public struct PlayerActions
     {
         private @PlayerInputSet m_Wrapper;
@@ -998,6 +1020,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         public InputAction @BasicAttack => m_Wrapper.m_Player_BasicAttack;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @Parry => m_Wrapper.m_Player_Parry;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1022,6 +1045,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @Parry.started += instance.OnParry;
+            @Parry.performed += instance.OnParry;
+            @Parry.canceled += instance.OnParry;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1041,6 +1067,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @Parry.started -= instance.OnParry;
+            @Parry.performed -= instance.OnParry;
+            @Parry.canceled -= instance.OnParry;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1228,6 +1257,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         void OnBasicAttack(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnParry(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

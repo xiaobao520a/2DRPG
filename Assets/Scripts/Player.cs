@@ -29,7 +29,7 @@ public class Player : Entity
     public bool canDash; //能否dash
     public float dashTimer; //计算是否冷却完成的计时器
 
-    [Header("普攻/战斗相关")]
+    [Header("普攻相关")]
     public int basicAttackCount; //普攻有几段
     public float basicAttack_TimeWindow; //检测攻击键输入的最大时间 这段时间内输入就继续攻击 否则就退出攻击状态
     public List<Vector2> basicAttack_Velocity; //每段普攻进行的小幅度位移 的速度数组
@@ -40,6 +40,16 @@ public class Player : Entity
     public Vector2 knockBackForce; //击退力
     public float attackDamage;
     public float knockBackDeceleration; //击退速度的衰减速率 防止被击退后一直滑动
+
+    [Header("格挡/弹反相关")]
+    public float parryDuration; //格挡状态持续的时间
+    public float parryDetect_Radius; //格挡检测的半径
+    public Vector2 parryDetect_Offset; //格挡检测点的偏移
+    public float parryDetect_Angle; //格挡检测的角度
+    public float counterDamage; //反击伤害
+    public Vector2 counterKnockBackForce; //反击击退力
+    public float counterDuration; //反击持续时间
+
 
 
     //Player的所有状态
@@ -52,6 +62,9 @@ public class Player : Entity
     public Player_DashState DashState { get; private set; } //冲刺状态
     public Player_BasicAttackState BasicAttackState { get; private set; } //普攻状态
     public Player_DieState DieState { get; private set; } //死亡状态
+    public Player_ParryState ParryState { get; private set; } //格挡状态
+    public Player_CounterState CounterState { get; private set; } //反击状态
+
 
 
     protected override void Awake()
@@ -84,10 +97,16 @@ public class Player : Entity
         attackOffset= playerDataSO.attackOffset;
         knockBackForce = playerDataSO.knockBackForce;
         knockBackDeceleration = playerDataSO.knockBackDeceleration;
+        parryDuration = playerDataSO.parryDuration;
+        parryDetect_Radius= playerDataSO.parryDetect_Radius;
+        parryDetect_Offset=playerDataSO.parryDetect_Offset;
+        parryDetect_Angle= playerDataSO.parryDetect_Angle;
+        counterDamage = playerDataSO.counterDamage;
+        counterKnockBackForce = playerDataSO.counterKnockBackForce;
+        counterDuration=playerDataSO.counterDuration;
 
 
-
-        canDash = true;
+    canDash = true;
         isDead = false;
 
         //开启各种输入的监听 这里我加的是Lambda 所以如果频繁的失活激活其实会加很多监听函数
@@ -113,6 +132,8 @@ public class Player : Entity
         DashState = new Player_DashState("Dash", stateMachine, this);
         BasicAttackState = new Player_BasicAttackState("BasicAttack", stateMachine, this);
         DieState = new Player_DieState("Die", stateMachine, this);
+        ParryState = new Player_ParryState("Parry", stateMachine, this);
+        CounterState = new Player_CounterState("Counter", stateMachine, this);
     }
 
     private void OnEnable()

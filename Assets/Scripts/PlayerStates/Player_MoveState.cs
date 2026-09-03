@@ -14,6 +14,9 @@ public class Player_MoveState : Player_GroundState
     {
         base.Update();
 
+        //base里可能已经切走了(跳跃/攻击/格挡/dash) 切走了就不再执行本状态的速度逻辑
+        if (stateMachine.CurrentState != this) return;
+
         //只要moveInput的x为0 就切换去idlestate
         if (player.moveInput.x == 0)
         {
