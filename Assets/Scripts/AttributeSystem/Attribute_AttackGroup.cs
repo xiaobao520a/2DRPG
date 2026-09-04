@@ -7,13 +7,27 @@ using UnityEngine;
 [Serializable]
 public class Attribute_AttackGroup
 {
-    //物理攻击
-    public Attribute damage;
-    public Attribute critPower;
-    public Attribute critChance;
+    public Attribute damage = new Attribute(10); //物理攻击
+    public Attribute critPower = new Attribute(150); //暴击伤害(%)
+    public Attribute critChance = new Attribute(5); //暴击率(%)
 
     //元素攻击
-    public Attribute fireDamage;
-    public Attribute iceDamage;
-    public Attribute lightningDamage;
+    public Attribute fireDamage = new Attribute(0); //火
+    public Attribute iceDamage = new Attribute(0); //冰
+    public Attribute lightningDamage = new Attribute(0); //闪电
+
+    public Attribute_AttackGroup()
+    {
+    }
+
+    //深拷贝构造函数
+    public Attribute_AttackGroup(Attribute_AttackGroup source)
+    {
+        damage = new Attribute(source != null && source.damage != null ? source.damage.Value : 0f);
+        critPower = new Attribute(source != null && source.critPower != null ? source.critPower.Value : 0f);
+        critChance = new Attribute(source != null && source.critChance != null ? source.critChance.Value : 0f);
+        fireDamage = new Attribute(source != null && source.fireDamage != null ? source.fireDamage.Value : 0f);
+        iceDamage = new Attribute(source != null && source.iceDamage != null ? source.iceDamage.Value : 0f);
+        lightningDamage = new Attribute(source != null && source.lightningDamage != null ? source.lightningDamage.Value : 0f);
+    }
 }

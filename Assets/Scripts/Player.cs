@@ -50,6 +50,12 @@ public class Player : Entity
     public Vector2 counterKnockBackForce; //反击击退力
     public float counterDuration; //反击持续时间
 
+    [Header("属性/成长相关")]
+    public float vitalityToHp; //每点活力增加的最大HP
+    public float agilityToEvasion; //每点敏捷增加的闪避率
+    public float maxEvasion; //闪避率上限
+    public float strengthToDamage; //每点力量提供的物理伤害
+
 
 
     //Player的所有状态
@@ -93,8 +99,11 @@ public class Player : Entity
         //初始化状态机的初始状态
         stateMachine.Init(IdleState);
 
+        //从配置文件初始化属性组(深拷贝) 再计算派生属性
+        entity_Attribute.InitAttributes(playerDataSO);
+
         //根据活力值 初始化最大Hp 和最开始的Hp
-        maxHp=entity_Attribute.GetMaxHp();
+        maxHp = entity_Attribute.GetMaxHp(vitalityToHp);
         nowHp = maxHp;
 
     }
@@ -143,6 +152,11 @@ public class Player : Entity
         counterDamage = playerDataSO.counterDamage;
         counterKnockBackForce = playerDataSO.counterKnockBackForce;
         counterDuration = playerDataSO.counterDuration;
+
+        vitalityToHp = playerDataSO.vitalityToHp;
+        agilityToEvasion = playerDataSO.agilityToEvasion;
+        maxEvasion = playerDataSO.maxEvasion;
+
 
 
         canDash = true;
@@ -219,9 +233,18 @@ public class Player : Entity
         stateMachine.ChangeState(DieState);
     }
 
+    //Player承受伤害的方法
     public override void TakeDamage(AttackHitData hitData)
     {
+        //如果死了 return
         if (isDead) return;
+
+        //如果闪避了 return
+        if (EvadeAttack())
+        {
+            Debug.Log("闪避了攻击");
+            return;
+        }
 
         nowHp -= hitData.damage;
         //播放受伤特效
@@ -237,4 +260,8 @@ public class Player : Entity
         
         
     }
+
+    //Player是否闪避了攻击
+    private bool EvadeAttack()=>Random.Range(0, 100) < entity_Attribute.GetEvasion(agilityToEvasion, maxEvasion);
+    
 }

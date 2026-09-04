@@ -16,13 +16,41 @@ public class Entity_Attribute : MonoBehaviour
         entity = GetComponent<Entity>();
     }
 
-    //得到最大血量
-    public float GetMaxHp()
+    //从配置文件深拷贝初始化属性组 运行时只改这里的数据 不污染SO资产
+    public void InitAttributes(PlayerDataSO so)
     {
-        float baseHp=entity.maxHp;
-        float bonusHp = majorGroup.vitality.Value * 5f; //每一点活力值增加5点最大HP
+        majorGroup = new Attribute_MajorGroup(so.majorGroup);
+        attackGroup = new Attribute_AttackGroup(so.attackGroup);
+        defenseGroup = new Attribute_DefenseGroup(so.defenseGroup);
+    }
+
+    //得到最大血量 初始化的时候用
+    public float GetMaxHp(float vitalityToHp)
+    {
+        float baseHp = entity.maxHp;
+        float bonusHp = majorGroup.vitality.Value * vitalityToHp;
         return baseHp + bonusHp;
     }
 
-    
+    //得到闪避率 限制闪避率有一个最大值
+    public float GetEvasion(float agilityToEvasion, float maxEvasion)
+    {
+        float baseEvasion = defenseGroup.evasion.Value;
+        float bonusEvasion = majorGroup.agility.Value * agilityToEvasion;
+        float finalEvasion = Mathf.Clamp(baseEvasion + bonusEvasion, 0, maxEvasion);
+
+        return finalEvasion;
+    }
+
+    //得到物理伤害
+    public float GetPhysicalDamage(float strengthToDamage)
+    {
+        //基础伤害(力量加成)
+        float baseDamage=attackGroup.damage.Value;
+        float bonusDamage = majorGroup.strength.Value * strengthToDamage;
+        float totalBaseDamage=baseDamage + bonusDamage;
+
+        //计算暴击相关
+        return 0.1f;
+    }
 }

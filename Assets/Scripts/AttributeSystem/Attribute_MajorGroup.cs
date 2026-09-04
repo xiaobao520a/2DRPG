@@ -7,8 +7,21 @@ using UnityEngine;
 [Serializable]
 public class Attribute_MajorGroup
 {
-    public Attribute strength; //力量
-    public Attribute agility; //敏捷
-    public Attribute intelligence; //智力
-    public Attribute vitality; //活力 每一点活力值增加5点最大HP
+    public Attribute strength = new Attribute(5); //力量
+    public Attribute agility = new Attribute(5); //敏捷
+    public Attribute intelligence = new Attribute(5); //智力
+    public Attribute vitality = new Attribute(5); //活力 每点活力增加 vitalityToHp 点最大HP
+
+    public Attribute_MajorGroup()
+    {
+    }
+
+    //深拷贝构造函数 从模板复制一份独立的运行时数据
+    public Attribute_MajorGroup(Attribute_MajorGroup source)
+    {
+        strength = new Attribute(source != null && source.strength != null ? source.strength.Value : 0f);
+        agility = new Attribute(source != null && source.agility != null ? source.agility.Value : 0f);
+        intelligence = new Attribute(source != null && source.intelligence != null ? source.intelligence.Value : 0f);
+        vitality = new Attribute(source != null && source.vitality != null ? source.vitality.Value : 0f);
+    }
 }
