@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 153170406}
   - component: {fileID: 153170405}
   - component: {fileID: 153170407}
+  - component: {fileID: 153170408}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -426,6 +427,58 @@ MonoBehaviour:
   knockBackForce: {x: 3, y: 2}
   attackDamage: 0
   knockBackDeceleration: 0
+  parryDuration: 0
+  parryDetect_Radius: 0
+  parryDetect_Offset: {x: 0, y: 0}
+  parryDetect_Angle: 0
+  counterDamage: 0
+  counterKnockBackForce: {x: 0, y: 0}
+  counterDuration: 0
+--- !u!114 &153170408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153170402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 645f551cc019d8640a94e30381f56754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  majorGroup:
+    strength:
+      value: 0
+    agility:
+      value: 0
+    intelligence:
+      value: 0
+    vitality:
+      value: 0
+  attackGroup:
+    damage:
+      value: 0
+    critPower:
+      value: 0
+    critChance:
+      value: 0
+    fireDamage:
+      value: 0
+    iceDamage:
+      value: 0
+    lightningDamage:
+      value: 0
+  defenseGroup:
+    armor:
+      value: 0
+    evasion:
+      value: 0
+    fireRes:
+      value: 0
+    iceRes:
+      value: 0
+    lightningRes:
+      value: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,8 +634,6 @@ MonoBehaviour:
   attackCD: 0
   attackDamage: 0
   stunnedDuration: 0
-  stunnedVelocity: 0
-  canStunned: 0
   enemy_SkeletonDataSO: {fileID: 11400000, guid: d3b9ae1ffe34a7c4e838016b27f06d53, type: 2}
 --- !u!70 &535843901
 CapsuleCollider2D:

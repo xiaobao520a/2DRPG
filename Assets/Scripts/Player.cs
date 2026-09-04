@@ -71,69 +71,14 @@ public class Player : Entity
     {
         base.Awake();
 
-        //初始化输入
-        playerInputSet = new PlayerInputSet();
+        //初始化变量
+        InitAllVariables();
 
-        //初始化变量 从PlayerDataSO配置文件中去读取
-        jumpForce = playerDataSO.jumpForce;
-        moveSpeed = playerDataSO.moveSpeed; 
-        inAir_Multiplier = playerDataSO.inAir_Multiplier;
-        wallSlideSpeed = playerDataSO.wallSlideSpeed;
-        inWall_Multiplier = playerDataSO.inWall_multiplier;
-        wallJumpForce= playerDataSO.wallJumpForce;
-        dashSpeed = playerDataSO.dashSpeed;
-        dashTime = playerDataSO.dashTime;
-        basicAttackCount = playerDataSO.basicAttackCount;
-        basicAttack_TimeWindow=playerDataSO.basicAttack_TimeWindow;
-        basicAttack_Velocity = playerDataSO.basicAttack_Velocity;
-        wallJumpTime = playerDataSO.wallJumpTime;
-        dashCD= playerDataSO.dashCD;
-        nowHp = playerDataSO.nowHp;
-        maxHp = playerDataSO.maxHp;
-        attackDamage = playerDataSO.attackDamage;
-        basicAttack_velocityTimeWindow = playerDataSO.basicAttack_velocityTimeWindow;
-        attackRadius= playerDataSO.attackRadius;
-        attackAngle= playerDataSO.attackAngle;
-        attackOffset= playerDataSO.attackOffset;
-        knockBackForce = playerDataSO.knockBackForce;
-        knockBackDeceleration = playerDataSO.knockBackDeceleration;
-        parryDuration = playerDataSO.parryDuration;
-        parryDetect_Radius= playerDataSO.parryDetect_Radius;
-        parryDetect_Offset=playerDataSO.parryDetect_Offset;
-        parryDetect_Angle= playerDataSO.parryDetect_Angle;
-        counterDamage = playerDataSO.counterDamage;
-        counterKnockBackForce = playerDataSO.counterKnockBackForce;
-        counterDuration=playerDataSO.counterDuration;
+        //初始化输入 开启输入监听
+        InitInputSet();
 
-
-    canDash = true;
-        isDead = false;
-
-        //开启各种输入的监听 这里我加的是Lambda 所以如果频繁的失活激活其实会加很多监听函数
-        //但是我的Player不会这样 所以我就暂时写在OnEnable了 也可以直接写在Awake或者Start就不存在这个问题
-        //移动
-        playerInputSet.Player.Move.performed += ((context) =>
-        {
-            moveInput = context.ReadValue<Vector2>();
-        });
-
-        playerInputSet.Player.Move.canceled += ((context) =>
-        {
-            moveInput = Vector2.zero;
-        });
-
-        //初始化所有的状态
-        IdleState = new Player_IdleState("Idle",stateMachine,this);
-        MoveState=new Player_MoveState("Move",stateMachine,this);
-        JumpState = new Player_JumpState("JumpFall", stateMachine, this);
-        FallState = new Player_FallState("JumpFall", stateMachine, this);
-        WallSlideState = new Player_WallSlideState("WallSlide", stateMachine, this);
-        WallJumpState = new Player_WallJumpState("WallJump", stateMachine, this);
-        DashState = new Player_DashState("Dash", stateMachine, this);
-        BasicAttackState = new Player_BasicAttackState("BasicAttack", stateMachine, this);
-        DieState = new Player_DieState("Die", stateMachine, this);
-        ParryState = new Player_ParryState("Parry", stateMachine, this);
-        CounterState = new Player_CounterState("Counter", stateMachine, this);
+        //初始化所有状态
+        InitAllStates();
     }
 
     private void OnEnable()
@@ -147,6 +92,11 @@ public class Player : Entity
         base.Start();
         //初始化状态机的初始状态
         stateMachine.Init(IdleState);
+
+        //根据活力值 初始化最大Hp 和最开始的Hp
+        maxHp=entity_Attribute.GetMaxHp();
+        nowHp = maxHp;
+
     }
 
     protected override void Update()
@@ -158,6 +108,82 @@ public class Player : Entity
     {
         //禁用输入
         playerInputSet.Disable();
+    }
+
+    //初始化所有变量的方法
+    private void InitAllVariables()
+    {
+        //初始化变量 从PlayerDataSO配置文件中去读取
+        jumpForce = playerDataSO.jumpForce;
+        moveSpeed = playerDataSO.moveSpeed;
+        inAir_Multiplier = playerDataSO.inAir_Multiplier;
+        wallSlideSpeed = playerDataSO.wallSlideSpeed;
+        inWall_Multiplier = playerDataSO.inWall_multiplier;
+        wallJumpForce = playerDataSO.wallJumpForce;
+        dashSpeed = playerDataSO.dashSpeed;
+        dashTime = playerDataSO.dashTime;
+        basicAttackCount = playerDataSO.basicAttackCount;
+        basicAttack_TimeWindow = playerDataSO.basicAttack_TimeWindow;
+        basicAttack_Velocity = playerDataSO.basicAttack_Velocity;
+        wallJumpTime = playerDataSO.wallJumpTime;
+        dashCD = playerDataSO.dashCD;
+        nowHp = playerDataSO.nowHp;
+        maxHp = playerDataSO.maxHp;
+        attackDamage = playerDataSO.attackDamage;
+        basicAttack_velocityTimeWindow = playerDataSO.basicAttack_velocityTimeWindow;
+        attackRadius = playerDataSO.attackRadius;
+        attackAngle = playerDataSO.attackAngle;
+        attackOffset = playerDataSO.attackOffset;
+        knockBackForce = playerDataSO.knockBackForce;
+        knockBackDeceleration = playerDataSO.knockBackDeceleration;
+        parryDuration = playerDataSO.parryDuration;
+        parryDetect_Radius = playerDataSO.parryDetect_Radius;
+        parryDetect_Offset = playerDataSO.parryDetect_Offset;
+        parryDetect_Angle = playerDataSO.parryDetect_Angle;
+        counterDamage = playerDataSO.counterDamage;
+        counterKnockBackForce = playerDataSO.counterKnockBackForce;
+        counterDuration = playerDataSO.counterDuration;
+
+
+        canDash = true;
+        isDead = false;
+    }
+
+    //初始化输入的方法 开启输入监听
+    private void InitInputSet()
+    {
+        //初始化输入
+        playerInputSet = new PlayerInputSet();
+
+        //开启各种输入的监听 这里我加的是Lambda 所以如果频繁的失活激活其实会加很多监听函数
+        //但是我的Player不会这样 所以我就暂时写在OnEnable了 也可以直接写在Awake或者Start就不存在这个问题
+        //移动
+        playerInputSet.Player.Move.performed += ((context) =>
+        {
+            moveInput = context.ReadValue<Vector2>();
+        });
+
+        playerInputSet.Player.Move.canceled += ((context) =>
+        {
+            moveInput = Vector2.zero;
+        });
+    }
+
+    //初始化所有状态
+    private void InitAllStates()
+    {
+        //初始化所有的状态
+        IdleState = new Player_IdleState("Idle", stateMachine, this);
+        MoveState = new Player_MoveState("Move", stateMachine, this);
+        JumpState = new Player_JumpState("JumpFall", stateMachine, this);
+        FallState = new Player_FallState("JumpFall", stateMachine, this);
+        WallSlideState = new Player_WallSlideState("WallSlide", stateMachine, this);
+        WallJumpState = new Player_WallJumpState("WallJump", stateMachine, this);
+        DashState = new Player_DashState("Dash", stateMachine, this);
+        BasicAttackState = new Player_BasicAttackState("BasicAttack", stateMachine, this);
+        DieState = new Player_DieState("Die", stateMachine, this);
+        ParryState = new Player_ParryState("Parry", stateMachine, this);
+        CounterState = new Player_CounterState("Counter", stateMachine, this);
     }
 
     public override void OnAnimationEvent(string eventName)

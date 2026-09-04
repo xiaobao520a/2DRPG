@@ -12,6 +12,7 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver,IDamageable
     protected StateMachine stateMachine;
     protected Animator animator;
     protected Rigidbody2D rb;
+    protected Entity_Attribute entity_Attribute;
 
     //都需要的变量
     //物理 运动相关
@@ -44,6 +45,7 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver,IDamageable
         stateMachine = new StateMachine();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponentInChildren<Rigidbody2D>();
+        entity_Attribute=GetComponent<Entity_Attribute>();
     }
 
     //一直执行状态机的Update 同时进行地面检测 墙壁检测

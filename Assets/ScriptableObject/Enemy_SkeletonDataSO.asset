@@ -26,5 +26,5 @@ MonoBehaviour:
   attackOffset: {x: 1.4, y: 0}
   knockBackForce: {x: 3, y: 2}
   attackDamage: 10
-  stunnedDuration: 1
+  stunnedDuration: 1.5
   stunnedVelocity: 7
