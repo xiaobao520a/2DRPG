@@ -21,26 +21,35 @@ public class VFXMgr : MonoBehaviour
     private void OnEnable()
     {
         //PlayDamageVFX
-        EventCenter.Instance.AddListener<Entity>(E_EventType.PlayerHurt, PlayDamageVFX);
-        EventCenter.Instance.AddListener<Entity>(E_EventType.EnemyHurt, PlayDamageVFX);
+        EventCenter.Instance.AddListener<HurtData>(E_EventType.PlayerHurt, PlayDamageVFX);
+        EventCenter.Instance.AddListener<HurtData>(E_EventType.EnemyHurt, PlayDamageVFX);
         EventCenter.Instance.AddListener<Chest>(E_EventType.ChestOpen, PlayDamageVFX);
 
         //PlayEnemyAttackAlertVFX
         EventCenter.Instance.AddListener<bool>(E_EventType.Enemy_AttackAlertBegin, PlayEnemyAttackAlertVFX);
         EventCenter.Instance.AddListener<bool>(E_EventType.Enemy_AttackAlertEnd, PlayEnemyAttackAlertVFX);
 
+        //PlayerHitVFX
+        EventCenter.Instance.AddListener<HurtData>(E_EventType.PlayerHurt, PlayHitVFX);
+        EventCenter.Instance.AddListener<HurtData>(E_EventType.EnemyHurt, PlayHitVFX);
+
+
     }
 
     private void OnDisable()
     {
         //PlayDamageVFX
-        EventCenter.Instance.RemoveListener<Entity>(E_EventType.PlayerHurt, PlayDamageVFX);
-        EventCenter.Instance.RemoveListener<Entity>(E_EventType.EnemyHurt, PlayDamageVFX);
+        EventCenter.Instance.RemoveListener<HurtData>(E_EventType.PlayerHurt, PlayDamageVFX);
+        EventCenter.Instance.RemoveListener<HurtData>(E_EventType.EnemyHurt, PlayDamageVFX);
         EventCenter.Instance.RemoveListener<Chest>(E_EventType.ChestOpen, PlayDamageVFX);
 
         //PlayEnemyAttackAlertVFX
         EventCenter.Instance.RemoveListener<bool>(E_EventType.Enemy_AttackAlertBegin, PlayEnemyAttackAlertVFX);
         EventCenter.Instance.RemoveListener<bool>(E_EventType.Enemy_AttackAlertEnd, PlayEnemyAttackAlertVFX);
+
+        //PlayerHitVFX
+        EventCenter.Instance.RemoveListener<HurtData>(E_EventType.PlayerHurt, PlayHitVFX);
+        EventCenter.Instance.RemoveListener<HurtData>(E_EventType.EnemyHurt, PlayHitVFX);
 
 
     }
@@ -56,12 +65,22 @@ public class VFXMgr : MonoBehaviour
 
     [Header("敌人攻击预警相关")]
     [SerializeField] private GameObject enemy_AttackAlertObj;
-    //播放受伤时的视觉特效
-    public void PlayDamageVFX(Entity entity)
-    {
-        if (entity == null || onDamage_VFXMaterial == null) return;
 
-        SpriteRenderer sr = entity.GetComponentInChildren<SpriteRenderer>();
+    [Header("命中特效")]
+    [SerializeField] private GameObject VFX_Hit;
+    [SerializeField] private Color enemyHitColor= Color.yellow;
+    [SerializeField] private Color playerHitColor = Color.gray;
+
+    [Header("暴击特效")]
+    [SerializeField] private GameObject VFX_CritHit;
+    [SerializeField] private Color CritColor=Color.red;
+
+    //播放受伤时的视觉特效
+    public void PlayDamageVFX(HurtData hurtData)
+    {
+        if (hurtData.hurtEntity == null || onDamage_VFXMaterial == null) return;
+
+        SpriteRenderer sr = hurtData.hurtEntity.GetComponentInChildren<SpriteRenderer>();
         if (sr == null) return;
 
         //这个渲染器正在闪 忽略这次 防止抓到伤害材质导致卡死
@@ -87,6 +106,7 @@ public class VFXMgr : MonoBehaviour
         Material originalMaterial = sr.material;
         StartCoroutine(PlayDamageVFX_Coroutine(sr, originalMaterial));
     }
+
     IEnumerator PlayDamageVFX_Coroutine(SpriteRenderer sr, Material originalMaterial)
     {
         sr.material = onDamage_VFXMaterial;
@@ -101,4 +121,32 @@ public class VFXMgr : MonoBehaviour
     {
         enemy_AttackAlertObj.SetActive(isOpen);
     }
+
+    //播放命中特效 也是在PlayerHurt和EnemyHurt事件中触发
+    public void PlayHitVFX(HurtData hurtData)
+    {
+        //如果没有暴击 播放普通的Hit特效
+        if (!hurtData.isCrit)
+        {
+            //播放特效 设置颜色 1s后删除特效
+            GameObject obj = Instantiate(VFX_Hit, hurtData.hurtEntity.transform.position, Quaternion.identity);
+            SpriteRenderer sr = obj.GetComponentInChildren<SpriteRenderer>();
+
+            if (hurtData.hurtEntity is Player) sr.color = playerHitColor;
+            else if (hurtData.hurtEntity is Enemy) sr.color = enemyHitColor;
+
+            Destroy(obj, 1f);
+        }
+
+        //如果暴击了 播放暴击Hit特效
+        else
+        {
+            GameObject obj = Instantiate(VFX_CritHit, hurtData.hurtEntity.transform.position, Quaternion.identity);
+            SpriteRenderer sr = obj.GetComponentInChildren<SpriteRenderer>();
+            sr.color = CritColor;
+
+            Destroy(obj, 1f);
+        }
+    }
+
 }

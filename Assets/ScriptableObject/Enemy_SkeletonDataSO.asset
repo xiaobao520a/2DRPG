@@ -28,3 +28,28 @@ MonoBehaviour:
   attackDamage: 10
   stunnedDuration: 1.5
   stunnedVelocity: 7
+  attackGroup:
+    damage:
+      value: 10
+    critPower:
+      value: 150
+    critChance:
+      value: 5
+    fireDamage:
+      value: 0
+    iceDamage:
+      value: 0
+    lightningDamage:
+      value: 0
+  defenseGroup:
+    armor:
+      value: 1
+    evasion:
+      value: 1
+    fireRes:
+      value: 1
+    iceRes:
+      value: 0
+    lightningRes:
+      value: 0
+  maxEvasion: 75

@@ -12,7 +12,7 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver,IDamageable
     protected StateMachine stateMachine;
     protected Animator animator;
     protected Rigidbody2D rb;
-    protected Entity_Attribute entity_Attribute;
+    public Entity_Attribute entity_Attribute;
 
     //都需要的变量
     //物理 运动相关
@@ -113,6 +113,7 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver,IDamageable
         isRight = isRight ? false : true;
         transform.Rotate(Vector3.up, 180, Space.World);
     }
+
 
     //画出地面检测和墙壁检测的线 方便观察调试
     protected virtual void OnDrawGizmos()

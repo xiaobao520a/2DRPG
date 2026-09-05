@@ -24,4 +24,5 @@ public class Attribute_MajorGroup
         intelligence = new Attribute(source != null && source.intelligence != null ? source.intelligence.Value : 0f);
         vitality = new Attribute(source != null && source.vitality != null ? source.vitality.Value : 0f);
     }
+
 }

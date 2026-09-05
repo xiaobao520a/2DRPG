@@ -30,12 +30,15 @@ public class Enemy_AttackState : EnemyState
                 hitCollider=Physics2D.OverlapCircle(enemy.transform.position + new Vector3(enemy.attackOffset.x * (enemy.isRight ? 1 : -1), enemy.attackOffset.y,0),
                     enemy.attackRadius,enemy.playerLayer);
 
+                bool isCrit;
                 //如果击中了 就调用TakeDamage
                 if (hitCollider != null)
                 {
                     AttackHitData hitData = new AttackHitData()
                     {
-                        damage = enemy.attackDamage,
+                        //计算算上暴击之后的物理伤害
+                        damage = enemy.entity_Attribute.GetPhysicalDamage(0, 0, 0, out isCrit),
+                        isCrit = isCrit,
                         knockBackForce = enemy.knockBackForce,
                         knockBackDirection = enemy.player.transform.position.x - enemy.transform.position.x > 0 ? 1 : -1,
                         hitEntity = enemy

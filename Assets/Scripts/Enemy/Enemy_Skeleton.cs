@@ -39,8 +39,16 @@ public class Enemy_Skeleton : Enemy
         attackOffset=enemy_SkeletonDataSO.attackOffset;
         knockBackForce=enemy_SkeletonDataSO.knockBackForce;
         stunnedDuration=enemy_SkeletonDataSO.stunnedDuration;
+
+        maxEvasion=enemy_SkeletonDataSO.maxEvasion;
     }
 
+    protected override void Start()
+    {
+        base.Start();
+
+        entity_Attribute.InitAttributes(enemy_SkeletonDataSO);
+    }
     protected override void Update()
     {
         base.Update();

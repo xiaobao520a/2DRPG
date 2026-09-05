@@ -6,6 +6,7 @@ using UnityEngine;
 public struct AttackHitData
 {
     public float damage; //伤害 箱子之类的可以忽略
+    public bool isCrit; //是否暴击
     public Vector2 knockBackForce; //击退力
     public float knockBackDirection; //1朝右击退 -1朝左击退
     public Entity hitEntity; //攻击者

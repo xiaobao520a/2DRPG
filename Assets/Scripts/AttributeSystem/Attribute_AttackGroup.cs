@@ -20,6 +20,7 @@ public class Attribute_AttackGroup
     {
     }
 
+
     //深拷贝构造函数
     public Attribute_AttackGroup(Attribute_AttackGroup source)
     {

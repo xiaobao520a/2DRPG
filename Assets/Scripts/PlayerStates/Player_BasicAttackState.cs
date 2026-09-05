@@ -76,12 +76,17 @@ public class Player_BasicAttackState : PlayerState
                 Vector2 startPoint = (Vector2)player.transform.position + player.attackOffset*(player.isRight?1:-1);
                 colliders = Physics2D.OverlapCircleAll(startPoint, player.attackRadius, player.enemyLayer|player.chestLayer);
 
+                bool isCrit;
                 AttackHitData hitData = new AttackHitData
                 {
-                    damage = player.attackDamage,
+                    //计算算上暴击之后的物理伤害
+                    damage = player.entity_Attribute.GetPhysicalDamage(player.strengthToDamage,
+                    player.agilityToCritChance, player.strengthToCritPower, out isCrit),
+
+                    isCrit = isCrit,
                     knockBackForce = player.knockBackForce,
                     knockBackDirection = player.isRight ? 1 : -1,
-                    hitEntity =player
+                    hitEntity = player
                 };
 
                 Vector2 facingDirection = player.isRight ? Vector2.right : Vector2.left;

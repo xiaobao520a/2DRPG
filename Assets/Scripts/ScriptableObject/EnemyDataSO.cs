@@ -9,7 +9,7 @@ public class EnemyDataSO : ScriptableObject
     public float idleTime = 2f; //Idle的时间
     public float moveSpeed = 5f; //移动速度
 
-    [Header("属性相关")]
+    [Header("血量相关")]
     public int nowHp; //当前hp
     public int maxHp; //最大hp
 
@@ -28,6 +28,12 @@ public class EnemyDataSO : ScriptableObject
     [Header("击晕相关")]
     public float stunnedDuration; //击晕的时间
     public float stunnedVelocity; //被击晕后的水平速度
+
+    [Header("属性相关")]
+    public Attribute_AttackGroup attackGroup = new Attribute_AttackGroup();
+    public Attribute_DefenseGroup defenseGroup= new Attribute_DefenseGroup();
+    public float maxEvasion = 85; //闪避率上限
+
 
 
 }

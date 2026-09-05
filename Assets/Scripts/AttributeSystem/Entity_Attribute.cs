@@ -24,6 +24,12 @@ public class Entity_Attribute : MonoBehaviour
         defenseGroup = new Attribute_DefenseGroup(so.defenseGroup);
     }
 
+    public void InitAttributes(EnemyDataSO so)
+    {
+        attackGroup = new Attribute_AttackGroup(so.attackGroup);
+        defenseGroup = new Attribute_DefenseGroup(so.defenseGroup);
+    }
+
     //得到最大血量 初始化的时候用
     public float GetMaxHp(float vitalityToHp)
     {
@@ -42,15 +48,28 @@ public class Entity_Attribute : MonoBehaviour
         return finalEvasion;
     }
 
-    //得到物理伤害
-    public float GetPhysicalDamage(float strengthToDamage)
+    //得到物理伤害 1 0.3 0.5 返回是否暴击
+    public float GetPhysicalDamage(float strengthToDamage,float agilityToCritChance,float strengthToCritPower,out bool isCrit)
     {
         //基础伤害(力量加成)
         float baseDamage=attackGroup.damage.Value;
         float bonusDamage = majorGroup.strength.Value * strengthToDamage;
         float totalBaseDamage=baseDamage + bonusDamage;
 
-        //计算暴击相关
-        return 0.1f;
+        //暴击率
+        float baseCritChance=attackGroup.critChance.Value;
+        float bonusCritChance=majorGroup.agility.Value*agilityToCritChance;
+        float critChance=baseCritChance+bonusCritChance;
+
+        //暴击伤害(相当于是攻击的Multiplier)
+        float baseCritPower=attackGroup.critPower.Value;
+        float bonusCritPower = majorGroup.strength.Value * strengthToCritPower;
+        float critPower = (baseCritPower + bonusCritPower) / 100;
+
+        //如果暴击 就乘上暴击伤害
+        isCrit = Random.Range(0, 100) < critChance;
+        float finalDamage=isCrit?totalBaseDamage*critPower:totalBaseDamage;
+        return finalDamage;
+
     }
 }

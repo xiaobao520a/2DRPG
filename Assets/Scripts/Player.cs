@@ -52,9 +52,14 @@ public class Player : Entity
 
     [Header("属性/成长相关")]
     public float vitalityToHp; //每点活力增加的最大HP
+
     public float agilityToEvasion; //每点敏捷增加的闪避率
-    public float maxEvasion; //闪避率上限
+    public float agilityToCritChance; //每点敏捷提供的暴击率
+
     public float strengthToDamage; //每点力量提供的物理伤害
+    public float strengthToCritPower; //每点力量提供的暴击力量
+
+    public float maxEvasion; //闪避率上限
 
 
 
@@ -153,7 +158,12 @@ public class Player : Entity
         counterKnockBackForce = playerDataSO.counterKnockBackForce;
         counterDuration = playerDataSO.counterDuration;
 
+        strengthToDamage= playerDataSO.strengthToDamage;
+        strengthToCritPower=playerDataSO.strengthToCritPower;
+
         vitalityToHp = playerDataSO.vitalityToHp;
+
+        agilityToCritChance=playerDataSO.agilityToCritChance;
         agilityToEvasion = playerDataSO.agilityToEvasion;
         maxEvasion = playerDataSO.maxEvasion;
 
@@ -247,8 +257,14 @@ public class Player : Entity
         }
 
         nowHp -= hitData.damage;
-        //播放受伤特效
-        EventCenter.Instance.Broadcast<Entity>(E_EventType.PlayerHurt, this);
+        HurtData hurtData = new HurtData()
+        {
+            isCrit = hitData.isCrit,
+            hurtEntity =this,
+        };
+        //播放受伤/受击特效
+        EventCenter.Instance.Broadcast<HurtData>(E_EventType.PlayerHurt, hurtData);
+
         if (nowHp <= 0)
         {
             Die();

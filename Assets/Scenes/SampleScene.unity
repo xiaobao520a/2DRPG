@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf32a4a207db5ce48bc7370612b2000c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entity_Attribute: {fileID: 0}
   moveSpeed: 5
   isRight: 1
   isGround: 0
@@ -398,7 +399,7 @@ MonoBehaviour:
   nowHp: 0
   maxHp: 0
   isDead: 0
-  playerDataSO: {fileID: 11400000, guid: ad98fdb9a25762941936e02b6b953a32, type: 2}
+  playerDataSO: {fileID: 11400000, guid: 744efce12f8a1c24c861521cd46f9d8b, type: 2}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -434,6 +435,12 @@ MonoBehaviour:
   counterDamage: 0
   counterKnockBackForce: {x: 0, y: 0}
   counterDuration: 0
+  vitalityToHp: 0
+  agilityToEvasion: 0
+  agilityToCritChance: 0
+  strengthToDamage: 0
+  strengthToCritPower: 0
+  maxEvasion: 0
 --- !u!114 &153170408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,6 +590,7 @@ GameObject:
   - component: {fileID: 535843902}
   - component: {fileID: 535843901}
   - component: {fileID: 535843900}
+  - component: {fileID: 535843904}
   m_Layer: 7
   m_Name: Enemy_Skeleton
   m_TagString: Enemy
@@ -602,6 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c76a40568c7ce4293641e02a75fb3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entity_Attribute: {fileID: 0}
   moveSpeed: 5
   isRight: 1
   isGround: 0
@@ -634,6 +643,7 @@ MonoBehaviour:
   attackCD: 0
   attackDamage: 0
   stunnedDuration: 0
+  maxEvasion: 85
   enemy_SkeletonDataSO: {fileID: 11400000, guid: d3b9ae1ffe34a7c4e838016b27f06d53, type: 2}
 --- !u!70 &535843901
 CapsuleCollider2D:
@@ -716,6 +726,51 @@ Transform:
   - {fileID: 1326899257}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &535843904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535843899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 645f551cc019d8640a94e30381f56754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  majorGroup:
+    strength:
+      value: 0
+    agility:
+      value: 0
+    intelligence:
+      value: 0
+    vitality:
+      value: 0
+  attackGroup:
+    damage:
+      value: 10
+    critPower:
+      value: 150
+    critChance:
+      value: 5
+    fireDamage:
+      value: 0
+    iceDamage:
+      value: 0
+    lightningDamage:
+      value: 0
+  defenseGroup:
+    armor:
+      value: 0
+    evasion:
+      value: 1000
+    fireRes:
+      value: 0
+    iceRes:
+      value: 0
+    lightningRes:
+      value: 0
 --- !u!1 &737130842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,6 +1434,11 @@ MonoBehaviour:
   onDamage_VFXMaterial: {fileID: 2100000, guid: 985d57bfcf2dda343939c0acf163084b, type: 2}
   onDamage_VFXDurationTime: 0.2
   enemy_AttackAlertObj: {fileID: 1326899256}
+  VFX_Hit: {fileID: 4019600103874167585, guid: c65e3cfd9279d64439b0c563a4498f4f, type: 3}
+  enemyHitColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  playerHitColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  VFX_CritHit: {fileID: 5181822293819917058, guid: ec3841005e8781c47a543277abaed28a, type: 3}
+  CritColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &1600532708
 Transform:
   m_ObjectHideFlags: 0
@@ -1679,10 +1739,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 1600532708}
   - {fileID: 153170404}
   - {fileID: 535843903}
+  - {fileID: 1074765575}
   - {fileID: 2095896508}
   - {fileID: 1484489764}
   - {fileID: 737130845}
-  - {fileID: 1074765575}
-  - {fileID: 1600532708}

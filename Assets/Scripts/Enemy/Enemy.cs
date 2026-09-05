@@ -40,11 +40,16 @@ public abstract class Enemy : Entity,ICountered
     public float stunnedDuration; //击晕的时间
     public bool CanBeCountered { get; set; }
 
+    [Header("属性相关")]
+    public float maxEvasion = 85; //闪避率上限
+
+
     protected override void Start()
     {
         base.Start();
 
         stateMachine.Init(idleState);
+
     }
 
     //敌人侦察Player是否在附近的函数
@@ -94,10 +99,23 @@ public abstract class Enemy : Entity,ICountered
         //如果已经死亡就直接return
         if (isDead) return;
 
+        //如果闪避
+        if (EvadeAttack())
+        {
+            Debug.Log("敌人闪避");
+            return;
+        }
+
         nowHp -= hitData.damage;
 
-        //播放受伤特效
-        EventCenter.Instance.Broadcast<Entity>(E_EventType.EnemyHurt, this);
+        HurtData hurtData = new HurtData()
+        {
+            isCrit = hitData.isCrit,
+            hurtEntity = this,
+        };
+        //播放受伤/受击特效
+        EventCenter.Instance.Broadcast<HurtData>(E_EventType.EnemyHurt, hurtData);
+
         if (nowHp <= 0)
         {
             Die();
@@ -130,4 +148,8 @@ public abstract class Enemy : Entity,ICountered
         stateMachine.ChangeState(stunnedState);
         return;
     }
+
+    //敌人是否闪避了攻击
+    private bool EvadeAttack() => Random.Range(0, 100) < entity_Attribute.GetEvasion(0, maxEvasion);
+
 }
