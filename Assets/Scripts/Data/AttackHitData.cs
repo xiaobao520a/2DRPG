@@ -10,4 +10,5 @@ public struct AttackHitData
     public Vector2 knockBackForce; //»÷ÍËÁ¦
     public float knockBackDirection; //1³¯ÓÒ»÷ÍË -1³¯×ó»÷ÍË
     public Entity hitEntity; //¹¥»÷Õß
+    public float armorPenetration; //´©Í¸ÂÊ ÆÆ¼×ÂÊ
 }

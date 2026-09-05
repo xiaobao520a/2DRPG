@@ -42,6 +42,7 @@ public abstract class Enemy : Entity,ICountered
 
     [Header("属性相关")]
     public float maxEvasion = 85; //闪避率上限
+    public float maxArmorMitigation; //最大护甲减伤率
 
 
     protected override void Start()
@@ -106,7 +107,10 @@ public abstract class Enemy : Entity,ICountered
             return;
         }
 
-        nowHp -= hitData.damage;
+        //算上护甲减伤的伤害才是最终伤害 以及攻击者的破甲率
+        float finalDamage = hitData.damage * 
+    (1-entity_Attribute.GetArmorMitigation(0,maxArmorMitigation,hitData.armorPenetration));
+        nowHp -= finalDamage;
 
         HurtData hurtData = new HurtData()
         {
@@ -144,6 +148,7 @@ public abstract class Enemy : Entity,ICountered
 
         //如果直接弹死了 就别stun了 直接return
         if (isDead) return;
+
         //默认直接进入StunnedState
         stateMachine.ChangeState(stunnedState);
         return;

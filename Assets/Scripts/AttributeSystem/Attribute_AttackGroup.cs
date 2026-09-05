@@ -10,6 +10,7 @@ public class Attribute_AttackGroup
     public Attribute damage = new Attribute(10); //ÎïÀí¹¥»÷
     public Attribute critPower = new Attribute(150); //±©»÷ÉËº¦(%)
     public Attribute critChance = new Attribute(5); //±©»÷ÂÊ(%)
+    public Attribute armorPenetration = new Attribute(0); //»¤¼×´©Í¸ÂÊ(%)
 
     //ÔªËØ¹¥»÷
     public Attribute fireDamage = new Attribute(0); //»ð
@@ -20,13 +21,13 @@ public class Attribute_AttackGroup
     {
     }
 
-
     //Éî¿½±´¹¹Ôìº¯Êý
     public Attribute_AttackGroup(Attribute_AttackGroup source)
     {
         damage = new Attribute(source != null && source.damage != null ? source.damage.Value : 0f);
         critPower = new Attribute(source != null && source.critPower != null ? source.critPower.Value : 0f);
         critChance = new Attribute(source != null && source.critChance != null ? source.critChance.Value : 0f);
+        armorPenetration = new Attribute(source != null && source.armorPenetration != null ? source.armorPenetration.Value : 0f);
         fireDamage = new Attribute(source != null && source.fireDamage != null ? source.fireDamage.Value : 0f);
         iceDamage = new Attribute(source != null && source.iceDamage != null ? source.iceDamage.Value : 0f);
         lightningDamage = new Attribute(source != null && source.lightningDamage != null ? source.lightningDamage.Value : 0f);

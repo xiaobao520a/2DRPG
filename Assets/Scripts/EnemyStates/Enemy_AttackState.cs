@@ -41,7 +41,8 @@ public class Enemy_AttackState : EnemyState
                         isCrit = isCrit,
                         knockBackForce = enemy.knockBackForce,
                         knockBackDirection = enemy.player.transform.position.x - enemy.transform.position.x > 0 ? 1 : -1,
-                        hitEntity = enemy
+                        hitEntity = enemy,
+                        armorPenetration = enemy.entity_Attribute.GetArmorPenetration()
                     };
                     hitCollider.GetComponent<IDamageable>().TakeDamage(hitData);
                 }

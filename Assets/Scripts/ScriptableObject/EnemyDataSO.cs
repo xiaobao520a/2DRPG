@@ -33,6 +33,8 @@ public class EnemyDataSO : ScriptableObject
     public Attribute_AttackGroup attackGroup = new Attribute_AttackGroup();
     public Attribute_DefenseGroup defenseGroup= new Attribute_DefenseGroup();
     public float maxEvasion = 85; //闪避率上限
+    public float maxArmorMitigation=0.85f; //最大护甲减伤率
+
 
 
 

@@ -46,10 +46,12 @@ MonoBehaviour:
   counterDuration: 0.2
   vitalityToHp: 1
   agilityToEvasion: 0.5
+  agilityToArmor: 1
   agilityToCritChance: 0.3
   strengthToDamage: 1
   strengthToCritPower: 0.5
   maxEvasion: 85
+  maxArmorMitigation: 0.85
   majorGroup:
     strength:
       value: 5
@@ -66,6 +68,8 @@ MonoBehaviour:
       value: 150
     critChance:
       value: 5
+    armorPenetration:
+      value: 0
     fireDamage:
       value: 0
     iceDamage:

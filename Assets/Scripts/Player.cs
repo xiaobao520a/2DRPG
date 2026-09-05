@@ -54,12 +54,15 @@ public class Player : Entity
     public float vitalityToHp; //每点活力增加的最大HP
 
     public float agilityToEvasion; //每点敏捷增加的闪避率
+    public float agilityToArmor; //每点敏捷提供的护甲值
     public float agilityToCritChance; //每点敏捷提供的暴击率
 
     public float strengthToDamage; //每点力量提供的物理伤害
     public float strengthToCritPower; //每点力量提供的暴击力量
 
     public float maxEvasion; //闪避率上限
+    public float maxArmorMitigation; //最大护甲减伤率
+
 
 
 
@@ -166,6 +169,7 @@ public class Player : Entity
         agilityToCritChance=playerDataSO.agilityToCritChance;
         agilityToEvasion = playerDataSO.agilityToEvasion;
         maxEvasion = playerDataSO.maxEvasion;
+        maxArmorMitigation = playerDataSO.maxArmorMitigation;
 
 
 
@@ -256,7 +260,11 @@ public class Player : Entity
             return;
         }
 
-        nowHp -= hitData.damage;
+        //算上护甲减伤的伤害才是最终伤害 以及攻击者的破甲率
+        float finalDamage = hitData.damage *
+    (1 - entity_Attribute.GetArmorMitigation(0, maxArmorMitigation, hitData.armorPenetration));
+        nowHp -= finalDamage;
+
         HurtData hurtData = new HurtData()
         {
             isCrit = hitData.isCrit,

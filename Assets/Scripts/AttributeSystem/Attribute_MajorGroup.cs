@@ -25,4 +25,13 @@ public class Attribute_MajorGroup
         vitality = new Attribute(source != null && source.vitality != null ? source.vitality.Value : 0f);
     }
 
+    public Attribute_MajorGroup(float strength,float agility,float intelligence,float vitality)
+    {
+        this.strength.Set(strength);
+        this.agility.Set(agility);
+        this.intelligence.Set(intelligence);
+        this.vitality.Set(vitality);  
+
+    }
+
 }

@@ -26,6 +26,7 @@ public class Entity_Attribute : MonoBehaviour
 
     public void InitAttributes(EnemyDataSO so)
     {
+        majorGroup = new Attribute_MajorGroup(0, 0, 0, 0);
         attackGroup = new Attribute_AttackGroup(so.attackGroup);
         defenseGroup = new Attribute_DefenseGroup(so.defenseGroup);
     }
@@ -48,28 +49,48 @@ public class Entity_Attribute : MonoBehaviour
         return finalEvasion;
     }
 
-    //得到物理伤害 1 0.3 0.5 返回是否暴击
-    public float GetPhysicalDamage(float strengthToDamage,float agilityToCritChance,float strengthToCritPower,out bool isCrit)
+    //得到物理伤害 返回是否暴击
+    public float GetPhysicalDamage(float strengthToDamage, float agilityToCritChance, float strengthToCritPower, out bool isCrit)
     {
         //基础伤害(力量加成)
-        float baseDamage=attackGroup.damage.Value;
+        float baseDamage = attackGroup.damage.Value;
         float bonusDamage = majorGroup.strength.Value * strengthToDamage;
-        float totalBaseDamage=baseDamage + bonusDamage;
+        float totalBaseDamage = baseDamage + bonusDamage;
 
         //暴击率
-        float baseCritChance=attackGroup.critChance.Value;
-        float bonusCritChance=majorGroup.agility.Value*agilityToCritChance;
-        float critChance=baseCritChance+bonusCritChance;
+        float baseCritChance = attackGroup.critChance.Value;
+        float bonusCritChance = majorGroup.agility.Value * agilityToCritChance;
+        float critChance = baseCritChance + bonusCritChance;
 
         //暴击伤害(相当于是攻击的Multiplier)
-        float baseCritPower=attackGroup.critPower.Value;
+        float baseCritPower = attackGroup.critPower.Value;
         float bonusCritPower = majorGroup.strength.Value * strengthToCritPower;
         float critPower = (baseCritPower + bonusCritPower) / 100;
 
         //如果暴击 就乘上暴击伤害
         isCrit = Random.Range(0, 100) < critChance;
-        float finalDamage=isCrit?totalBaseDamage*critPower:totalBaseDamage;
+        float finalDamage = isCrit ? totalBaseDamage * critPower : totalBaseDamage;
         return finalDamage;
+    }
 
+    //得到护甲减伤率 传入攻击者的破甲率 破甲会先折算护甲再算减伤
+    public float GetArmorMitigation(float agilityToArmor, float maxArmorMitigation, float armorPenetration)
+    {
+        float baseArmor = defenseGroup.armor.Value;
+        float bonusArmor = majorGroup.agility.Value * agilityToArmor;
+        float totalArmor = (baseArmor + bonusArmor) * Mathf.Clamp01(1f - armorPenetration); //破甲折算后的有效护甲
+
+        float mitigation = totalArmor / (totalArmor + 100);
+        mitigation = Mathf.Clamp(mitigation, 0, maxArmorMitigation);
+
+        return mitigation;
+    }
+
+    //得到破甲率(0~1)
+    public float GetArmorPenetration()
+    {
+        //先限制百分比在0~100 再转成0~1
+        float armorPenetration = Mathf.Clamp(attackGroup.armorPenetration.Value, 0, 100) / 100f;
+        return armorPenetration;
     }
 }

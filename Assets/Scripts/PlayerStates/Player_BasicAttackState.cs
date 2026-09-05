@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class Player_BasicAttackState : PlayerState
@@ -79,14 +80,16 @@ public class Player_BasicAttackState : PlayerState
                 bool isCrit;
                 AttackHitData hitData = new AttackHitData
                 {
-                    //计算算上暴击之后的物理伤害
+                    //计算算上暴击 之后的物理伤害 同时还有破甲率
                     damage = player.entity_Attribute.GetPhysicalDamage(player.strengthToDamage,
                     player.agilityToCritChance, player.strengthToCritPower, out isCrit),
 
                     isCrit = isCrit,
                     knockBackForce = player.knockBackForce,
                     knockBackDirection = player.isRight ? 1 : -1,
-                    hitEntity = player
+                    hitEntity = player,
+                    armorPenetration = player.entity_Attribute.GetArmorPenetration()
+
                 };
 
                 Vector2 facingDirection = player.isRight ? Vector2.right : Vector2.left;

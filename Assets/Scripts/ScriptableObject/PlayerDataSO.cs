@@ -53,12 +53,16 @@ public class PlayerDataSO : ScriptableObject
     public float vitalityToHp=1f; //每点活力增加的最大HP
 
     public float agilityToEvasion=0.5f; //每点敏捷增加的闪避率
+    public float agilityToArmor; //每点敏捷提供的护甲值
     public float agilityToCritChance=0.3f; //每点敏捷提供的暴击率
 
     public float strengthToDamage=1f; //每点力量提供的物理伤害
     public float strengthToCritPower=0.5f; //每点力量提供的暴击力量
 
     public float maxEvasion=85; //闪避率上限
+    public float maxArmorMitigation=0.85f; //最大护甲减伤率
+
+
 
     [Header("属性组")]
     public Attribute_MajorGroup majorGroup = new Attribute_MajorGroup(); //力量 敏捷 智力 活力
