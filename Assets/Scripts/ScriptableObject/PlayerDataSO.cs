@@ -33,7 +33,6 @@ public class PlayerDataSO : ScriptableObject
         new Vector2(3,1.5f),new Vector2(1,2.5f),new Vector2(5,2.5f)
     };
     public float basicAttack_velocityTimeWindow = 0.3f; //每段攻击添加速度的时间 防止滑动太多 手感不好
-    public float attackDamage = 10f; //基础普攻伤害
     public float attackRadius = 1.2f; //攻击的半径
     public float attackAngle = 120f; //扇形的角度
     public Vector2 attackOffset = new Vector2(0.5f, 0f); //攻击检测点的偏移量
@@ -59,8 +58,13 @@ public class PlayerDataSO : ScriptableObject
     public float strengthToDamage=1f; //每点力量提供的物理伤害
     public float strengthToCritPower=0.5f; //每点力量提供的暴击力量
 
-    public float maxEvasion=85; //闪避率上限
+    public float intelligenceToElementDamage=0.5f; //每点智力提供的元素伤害
+    public float intelligenceToElementRes=0.5f; //每点智力提供的元素抗性
+
+
+    public float maxEvasion=85f; //闪避率上限
     public float maxArmorMitigation=0.85f; //最大护甲减伤率
+    public float maxElementRes = 75f; //最大元素抗性
 
 
 

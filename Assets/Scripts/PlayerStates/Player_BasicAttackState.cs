@@ -78,12 +78,15 @@ public class Player_BasicAttackState : PlayerState
                 colliders = Physics2D.OverlapCircleAll(startPoint, player.attackRadius, player.enemyLayer|player.chestLayer);
 
                 bool isCrit;
+                E_ElementType type;
                 AttackHitData hitData = new AttackHitData
                 {
-                    //计算算上暴击 之后的物理伤害 同时还有破甲率
+                    //计算算上暴击 之后的物理伤害  同时还有破甲率 
                     damage = player.entity_Attribute.GetPhysicalDamage(player.strengthToDamage,
                     player.agilityToCritChance, player.strengthToCritPower, out isCrit),
 
+                    elementDamage=player.entity_Attribute.GetElementDamage(player.intelligenceToElementDamage,out type),
+                    elementType=type,
                     isCrit = isCrit,
                     knockBackForce = player.knockBackForce,
                     knockBackDirection = player.isRight ? 1 : -1,

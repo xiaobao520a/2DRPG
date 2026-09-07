@@ -25,16 +25,17 @@ MonoBehaviour:
   attackAngle: 120
   attackOffset: {x: 1.4, y: 0}
   knockBackForce: {x: 3, y: 2}
-  attackDamage: 10
   stunnedDuration: 1.5
   stunnedVelocity: 7
   attackGroup:
     damage:
-      value: 10
+      value: 18
     critPower:
       value: 150
     critChance:
       value: 5
+    armorPenetration:
+      value: 0
     fireDamage:
       value: 0
     iceDamage:
@@ -43,13 +44,15 @@ MonoBehaviour:
       value: 0
   defenseGroup:
     armor:
-      value: 1
+      value: 5
     evasion:
-      value: 1
+      value: 5
     fireRes:
-      value: 1
+      value: 10
     iceRes:
       value: 0
     lightningRes:
       value: 0
   maxEvasion: 75
+  maxArmorMitigation: 0.85
+  maxElementRes: 75

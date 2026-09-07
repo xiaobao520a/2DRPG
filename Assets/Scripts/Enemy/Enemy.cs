@@ -34,15 +34,12 @@ public abstract class Enemy : Entity,ICountered
     public Vector2 attackOffset; //攻击检测点的偏移量
     public Vector2 knockBackForce; //击退力
     public float attackCD; //攻击的CD 攻击一次后等待一段时间才能再次攻击
-    public float attackDamage; //普攻伤害
 
     [Header("击晕/反击相关")]
     public float stunnedDuration; //击晕的时间
     public bool CanBeCountered { get; set; }
 
-    [Header("属性相关")]
-    public float maxEvasion = 85; //闪避率上限
-    public float maxArmorMitigation; //最大护甲减伤率
+    
 
 
     protected override void Start()
@@ -107,15 +104,20 @@ public abstract class Enemy : Entity,ICountered
             return;
         }
 
-        //算上护甲减伤的伤害才是最终伤害 以及攻击者的破甲率
+        //算上护甲减伤的物理伤害 加上元素抗性下的元素伤害 才是最终伤害
         float finalDamage = hitData.damage * 
     (1-entity_Attribute.GetArmorMitigation(0,maxArmorMitigation,hitData.armorPenetration));
+
+        finalDamage += hitData.elementDamage * (1 - entity_Attribute.GetElementRes(0,hitData.elementType));
+        entity_Element.nowType = hitData.elementType;
+
         nowHp -= finalDamage;
 
         HurtData hurtData = new HurtData()
         {
             isCrit = hitData.isCrit,
             hurtEntity = this,
+            entity_Element = this.entity_Element,
         };
         //播放受伤/受击特效
         EventCenter.Instance.Broadcast<HurtData>(E_EventType.EnemyHurt, hurtData);

@@ -33,7 +33,6 @@ public class Enemy_Skeleton : Enemy
         nowHp=enemy_SkeletonDataSO.nowHp;
         maxHp=enemy_SkeletonDataSO.maxHp;
         isDead = false;
-        attackDamage=enemy_SkeletonDataSO.attackDamage;
         attackRadius=enemy_SkeletonDataSO.attackRadius;
         attackAngle=enemy_SkeletonDataSO.attackAngle;
         attackOffset=enemy_SkeletonDataSO.attackOffset;
@@ -41,6 +40,9 @@ public class Enemy_Skeleton : Enemy
         stunnedDuration=enemy_SkeletonDataSO.stunnedDuration;
 
         maxEvasion=enemy_SkeletonDataSO.maxEvasion;
+        maxArmorMitigation=enemy_SkeletonDataSO.maxArmorMitigation;
+        maxElementRes = enemy_SkeletonDataSO.maxElementRes;
+
     }
 
     protected override void Start()

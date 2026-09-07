@@ -33,6 +33,9 @@ public class VFXMgr : MonoBehaviour
         EventCenter.Instance.AddListener<HurtData>(E_EventType.PlayerHurt, PlayHitVFX);
         EventCenter.Instance.AddListener<HurtData>(E_EventType.EnemyHurt, PlayHitVFX);
 
+        //PlayElementVFX
+        EventCenter.Instance.AddListener<HurtData>(E_EventType.PlayerHurt, PlayElementVFX);
+        EventCenter.Instance.AddListener<HurtData>(E_EventType.EnemyHurt, PlayElementVFX);
 
     }
 
@@ -51,7 +54,13 @@ public class VFXMgr : MonoBehaviour
         EventCenter.Instance.RemoveListener<HurtData>(E_EventType.PlayerHurt, PlayHitVFX);
         EventCenter.Instance.RemoveListener<HurtData>(E_EventType.EnemyHurt, PlayHitVFX);
 
+        //PlayElementVFX
+        EventCenter.Instance.RemoveListener<HurtData>(E_EventType.PlayerHurt, PlayElementVFX);
+        EventCenter.Instance.RemoveListener<HurtData>(E_EventType.EnemyHurt, PlayElementVFX);
 
+        //删除所有协程 并清空记录
+        StopAllCoroutines();
+        elementVFXCoroutines.Clear();
     }
 
     [Header("受伤视觉特效相关")]
@@ -74,6 +83,12 @@ public class VFXMgr : MonoBehaviour
     [Header("暴击特效")]
     [SerializeField] private GameObject VFX_CritHit;
     [SerializeField] private Color CritColor=Color.red;
+
+    [Header("元素特效")]
+    [SerializeField] private Color iceColor = Color.cyan;
+    //正在播放元素特效的渲染器 -> 协程 每个渲染器独立 防止多目标互相覆盖
+    private Dictionary<SpriteRenderer, Coroutine> elementVFXCoroutines = new Dictionary<SpriteRenderer, Coroutine>();
+
 
     //播放受伤时的视觉特效
     public void PlayDamageVFX(HurtData hurtData)
@@ -146,6 +161,56 @@ public class VFXMgr : MonoBehaviour
             sr.color = CritColor;
 
             Destroy(obj, 1f);
+        }
+    }
+
+    //播放元素特效(ice fire lightning)
+    public void PlayElementVFX(HurtData hurtData)
+    {
+        //没有元素组件 或 元素类型为none 就不播
+        if (hurtData.entity_Element == null || hurtData.entity_Element.nowType == E_ElementType.none) return;
+        if (hurtData.hurtEntity == null) return;
+
+        SpriteRenderer sr = hurtData.hurtEntity.GetComponentInChildren<SpriteRenderer>();
+        if (sr == null) return;
+
+        //这个渲染器正在播元素特效 忽略这次
+        if (elementVFXCoroutines.ContainsKey(sr)) return;
+
+        //记录原始颜色 播完恢复 而不是写死白色
+        Color originalColor = sr.color;
+        elementVFXCoroutines[sr] = StartCoroutine(PlayElementVFX_Coroutine(sr, originalColor, hurtData.entity_Element));
+    }
+
+    //播放元素特效的协程函数
+    private IEnumerator PlayElementVFX_Coroutine(SpriteRenderer sr, Color originalColor, Entity_Element entity_Element)
+    {
+        try
+        {
+            switch (entity_Element.nowType)
+            {
+                case E_ElementType.ice:
+                    Color lightColor = iceColor * 1.2f;
+                    Color darkColor = iceColor * 0.8f;
+
+                    //只切换一次颜色 从深色到浅色 持续时间是iceDuration的一半
+                    for (int i = 0; i < 2; i++)
+                    {
+                        if (sr == null) yield break; //播放途中目标被销毁 直接结束
+                        sr.color = (i == 0) ? lightColor : darkColor;
+                        yield return new WaitForSeconds(entity_Element.iceDuration / 2f);
+                    }
+
+                    //结束后恢复原来的颜色
+                    if (sr != null)
+                        sr.color = originalColor;
+                    break;
+            }
+        }
+        finally
+        {
+            //无论正常结束还是目标销毁 都移除记录 防止卡死后续元素特效
+            elementVFXCoroutines.Remove(sr);
         }
     }
 

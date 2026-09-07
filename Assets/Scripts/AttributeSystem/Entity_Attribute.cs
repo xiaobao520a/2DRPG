@@ -73,6 +73,73 @@ public class Entity_Attribute : MonoBehaviour
         return finalDamage;
     }
 
+    //得到元素伤害
+    public float GetElementDamage(float intelligenceToElementDamage,out E_ElementType type)
+    {
+        float iceElementDamage = attackGroup.iceDamage.Value;
+        float fireElementDamage = attackGroup.fireDamage.Value;
+        float lightningElementDamage = attackGroup.lightningDamage.Value;
+        float bonusElementDamage = majorGroup.intelligence.Value * intelligenceToElementDamage;
+
+        float maxElementDamage = iceElementDamage;
+        E_ElementType tempType = E_ElementType.ice;
+
+        if (fireElementDamage > maxElementDamage)
+        {
+            maxElementDamage = fireElementDamage;
+            tempType = E_ElementType.fire;
+        }
+
+        if (lightningElementDamage > maxElementDamage)
+        {
+            maxElementDamage = lightningElementDamage;
+            tempType = E_ElementType.lightning;
+        }
+
+        if (maxElementDamage == 0)
+        {
+            tempType = E_ElementType.none;
+            type = tempType;
+            return 0;
+        }
+
+        float finalElementDamage = bonusElementDamage+maxElementDamage;
+
+        if (maxElementDamage != iceElementDamage) 
+            finalElementDamage += iceElementDamage*0.5f;
+
+        if (maxElementDamage != fireElementDamage) 
+            finalElementDamage += fireElementDamage*0.5f;
+
+        if (maxElementDamage != lightningElementDamage) 
+            finalElementDamage += lightningElementDamage*0.5f;
+
+        type=tempType;
+        return finalElementDamage;
+    }
+
+    //得到元素抗性率
+    public float GetElementRes(float intelligenceToElementRes,E_ElementType type)
+    {
+        float baseRes = 0;
+        switch(type)
+        {
+            case E_ElementType.ice:
+                baseRes = defenseGroup.iceRes.Value;
+                break;
+            case E_ElementType.fire:
+                baseRes = defenseGroup.fireRes.Value;
+                break;
+            case E_ElementType.lightning:
+                baseRes = defenseGroup.lightningRes.Value;
+                break;
+        }
+
+        float bonusRes = majorGroup.intelligence.Value * intelligenceToElementRes;
+        float finalRes = Mathf.Clamp(bonusRes + baseRes, 0, entity.maxElementRes) / 100;
+        return finalRes;
+    }
+
     //得到护甲减伤率 传入攻击者的破甲率 破甲会先折算护甲再算减伤
     public float GetArmorMitigation(float agilityToArmor, float maxArmorMitigation, float armorPenetration)
     {

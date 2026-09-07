@@ -23,7 +23,7 @@ MonoBehaviour:
   dashTime: 0.25
   dashCD: 0.3
   nowHp: 100
-  maxHp: 100
+  maxHp: 150
   basicAttackCount: 3
   basicAttack_TimeWindow: 0.2
   basicAttack_Velocity:
@@ -31,7 +31,6 @@ MonoBehaviour:
   - {x: 1, y: 2.5}
   - {x: 5, y: 2.5}
   basicAttack_velocityTimeWindow: 0.3
-  attackDamage: 10
   attackRadius: 1.2
   attackAngle: 120
   attackOffset: {x: 0.5, y: 0}
@@ -44,46 +43,49 @@ MonoBehaviour:
   counterDamage: 20
   counterKnockBackForce: {x: 5, y: 4}
   counterDuration: 0.2
-  vitalityToHp: 1
-  agilityToEvasion: 0.5
-  agilityToArmor: 1
+  vitalityToHp: 5
+  agilityToEvasion: 1
+  agilityToArmor: 0.5
   agilityToCritChance: 0.3
   strengthToDamage: 1
   strengthToCritPower: 0.5
+  intelligenceToElementDamage: 0.5
+  intelligenceToElementRes: 0.5
   maxEvasion: 85
   maxArmorMitigation: 0.85
+  maxElementRes: 75
   majorGroup:
     strength:
-      value: 5
+      value: 10
     agility:
-      value: 5
+      value: 10
     intelligence:
-      value: 5
+      value: 10
     vitality:
-      value: 5
+      value: 10
   attackGroup:
     damage:
-      value: 10
+      value: 18
     critPower:
       value: 150
     critChance:
-      value: 5
+      value: 8
     armorPenetration:
       value: 0
     fireDamage:
-      value: 0
+      value: 8
     iceDamage:
       value: 0
     lightningDamage:
       value: 0
   defenseGroup:
     armor:
-      value: 0
+      value: 10
     evasion:
       value: 0
     fireRes:
-      value: 0
+      value: 10
     iceRes:
-      value: 0
+      value: 10
     lightningRes:
-      value: 0
+      value: 5

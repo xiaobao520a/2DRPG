@@ -31,6 +31,7 @@ public class Enemy_AttackState : EnemyState
                     enemy.attackRadius,enemy.playerLayer);
 
                 bool isCrit;
+                E_ElementType type;
                 //如果击中了 就调用TakeDamage
                 if (hitCollider != null)
                 {
@@ -38,6 +39,10 @@ public class Enemy_AttackState : EnemyState
                     {
                         //计算算上暴击之后的物理伤害
                         damage = enemy.entity_Attribute.GetPhysicalDamage(0, 0, 0, out isCrit),
+
+                        //元素伤害
+                        elementDamage = enemy.entity_Attribute.GetElementDamage(0, out type),
+                        elementType = type,
                         isCrit = isCrit,
                         knockBackForce = enemy.knockBackForce,
                         knockBackDirection = enemy.player.transform.position.x - enemy.transform.position.x > 0 ? 1 : -1,

@@ -5,7 +5,9 @@ using UnityEngine;
 //攻击命中Data的数据集合 值类型
 public struct AttackHitData
 {
-    public float damage; //伤害 箱子之类的可以忽略
+    public float damage; //物理伤害 箱子之类的可以忽略
+    public float elementDamage; //元素伤害
+    public E_ElementType elementType; //元素伤害的元素类型
     public bool isCrit; //是否暴击
     public Vector2 knockBackForce; //击退力
     public float knockBackDirection; //1朝右击退 -1朝左击退

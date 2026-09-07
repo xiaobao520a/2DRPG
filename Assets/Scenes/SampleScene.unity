@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 153170405}
   - component: {fileID: 153170407}
   - component: {fileID: 153170408}
+  - component: {fileID: 153170409}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -399,6 +400,9 @@ MonoBehaviour:
   nowHp: 0
   maxHp: 0
   isDead: 0
+  maxEvasion: 0
+  maxArmorMitigation: 0
+  maxElementRes: 0
   playerDataSO: {fileID: 11400000, guid: 744efce12f8a1c24c861521cd46f9d8b, type: 2}
   enemyLayer:
     serializedVersion: 2
@@ -426,7 +430,6 @@ MonoBehaviour:
   attackAngle: 120
   attackOffset: {x: 1, y: 0}
   knockBackForce: {x: 3, y: 2}
-  attackDamage: 0
   knockBackDeceleration: 0
   parryDuration: 0
   parryDetect_Radius: 0
@@ -437,10 +440,12 @@ MonoBehaviour:
   counterDuration: 0
   vitalityToHp: 0
   agilityToEvasion: 0
+  agilityToArmor: 0
   agilityToCritChance: 0
   strengthToDamage: 0
   strengthToCritPower: 0
-  maxEvasion: 0
+  intelligenceToElementDamage: 0
+  intelligenceToElementRes: 0
 --- !u!114 &153170408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,6 +474,8 @@ MonoBehaviour:
       value: 0
     critChance:
       value: 0
+    armorPenetration:
+      value: 0
     fireDamage:
       value: 0
     iceDamage:
@@ -486,6 +493,22 @@ MonoBehaviour:
       value: 0
     lightningRes:
       value: 0
+--- !u!114 &153170409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153170402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45cb970710b4af488bae36dde9974ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elementDataSo: {fileID: 11400000, guid: 304153af95044fd42a9bbdecb875db5f, type: 2}
+  iceDuration: 0
+  slowDownMoveSpeed_Multiplier: 0
+  slowDownAnimationSpeed_Multiplier: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +614,7 @@ GameObject:
   - component: {fileID: 535843901}
   - component: {fileID: 535843900}
   - component: {fileID: 535843904}
+  - component: {fileID: 535843905}
   m_Layer: 7
   m_Name: Enemy_Skeleton
   m_TagString: Enemy
@@ -625,6 +649,9 @@ MonoBehaviour:
   nowHp: 0
   maxHp: 0
   isDead: 0
+  maxEvasion: 85
+  maxArmorMitigation: 0
+  maxElementRes: 0
   idleTime: 0
   moveAnimSpeedMultiplier: 1
   groundDetect_offsetX: 1.1
@@ -641,9 +668,7 @@ MonoBehaviour:
   attackOffset: {x: 0, y: 0}
   knockBackForce: {x: 0, y: 0}
   attackCD: 0
-  attackDamage: 0
   stunnedDuration: 0
-  maxEvasion: 85
   enemy_SkeletonDataSO: {fileID: 11400000, guid: d3b9ae1ffe34a7c4e838016b27f06d53, type: 2}
 --- !u!70 &535843901
 CapsuleCollider2D:
@@ -754,6 +779,8 @@ MonoBehaviour:
       value: 150
     critChance:
       value: 5
+    armorPenetration:
+      value: 0
     fireDamage:
       value: 0
     iceDamage:
@@ -771,6 +798,22 @@ MonoBehaviour:
       value: 0
     lightningRes:
       value: 0
+--- !u!114 &535843905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535843899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45cb970710b4af488bae36dde9974ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elementDataSo: {fileID: 11400000, guid: 304153af95044fd42a9bbdecb875db5f, type: 2}
+  iceDuration: 0
+  slowDownMoveSpeed_Multiplier: 0
+  slowDownAnimationSpeed_Multiplier: 0
 --- !u!1 &737130842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,6 +1482,7 @@ MonoBehaviour:
   playerHitColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   VFX_CritHit: {fileID: 5181822293819917058, guid: ec3841005e8781c47a543277abaed28a, type: 3}
   CritColor: {r: 1, g: 0, b: 0, a: 1}
+  iceColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!4 &1600532708
 Transform:
   m_ObjectHideFlags: 0

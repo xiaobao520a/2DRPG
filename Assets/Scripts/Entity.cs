@@ -13,6 +13,8 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver,IDamageable
     protected Animator animator;
     protected Rigidbody2D rb;
     public Entity_Attribute entity_Attribute;
+    public Entity_Element entity_Element;
+
 
     //都需要的变量
     //物理 运动相关
@@ -37,7 +39,10 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver,IDamageable
     public float maxHp; //最大hp
     public bool isDead; //是否死亡
 
-
+    [Header("属性相关")]
+    public float maxEvasion;//闪避率上限
+    public float maxArmorMitigation; //最大护甲减伤率
+    public float maxElementRes;//最大元素抗性
 
     //初始化变量 组件
     protected virtual void Awake()
@@ -46,6 +51,7 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver,IDamageable
         animator = GetComponentInChildren<Animator>();
         rb = GetComponentInChildren<Rigidbody2D>();
         entity_Attribute=GetComponent<Entity_Attribute>();
+        entity_Element=GetComponent<Entity_Element>();
     }
 
     //一直执行状态机的Update 同时进行地面检测 墙壁检测

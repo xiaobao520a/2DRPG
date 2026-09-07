@@ -7,4 +7,5 @@ public struct HurtData
 {
     public Entity hurtEntity; //受伤者
     public bool isCrit; //是否暴击
+    public Entity_Element entity_Element; //专门处理元素相关的脚本
 }

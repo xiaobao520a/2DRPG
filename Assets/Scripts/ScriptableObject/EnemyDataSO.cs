@@ -23,7 +23,6 @@ public class EnemyDataSO : ScriptableObject
     public float attackAngle = 120f; //扇形的角度
     public Vector2 attackOffset = new Vector2(1f, 0); //攻击检测点的偏移量
     public Vector2 knockBackForce = new Vector2(3f, 2f); //击退力
-    public float attackDamage = 10f; //普攻伤害
 
     [Header("击晕相关")]
     public float stunnedDuration; //击晕的时间
@@ -34,6 +33,7 @@ public class EnemyDataSO : ScriptableObject
     public Attribute_DefenseGroup defenseGroup= new Attribute_DefenseGroup();
     public float maxEvasion = 85; //闪避率上限
     public float maxArmorMitigation=0.85f; //最大护甲减伤率
+    public float maxElementRes = 75f; //最大元素抗性
 
 
 

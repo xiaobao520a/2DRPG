@@ -38,7 +38,6 @@ public class Player : Entity
     public float attackAngle;//扇形的角度
     public Vector2 attackOffset; //攻击检测点的偏移量
     public Vector2 knockBackForce; //击退力
-    public float attackDamage;
     public float knockBackDeceleration; //击退速度的衰减速率 防止被击退后一直滑动
 
     [Header("格挡/弹反相关")]
@@ -60,11 +59,8 @@ public class Player : Entity
     public float strengthToDamage; //每点力量提供的物理伤害
     public float strengthToCritPower; //每点力量提供的暴击力量
 
-    public float maxEvasion; //闪避率上限
-    public float maxArmorMitigation; //最大护甲减伤率
-
-
-
+    public float intelligenceToElementDamage; //每点智力提供的元素伤害
+    public float intelligenceToElementRes; //每点智力提供的元素抗性
 
     //Player的所有状态
     public Player_IdleState IdleState { get; private set; } //空闲状态
@@ -146,7 +142,6 @@ public class Player : Entity
         dashCD = playerDataSO.dashCD;
         nowHp = playerDataSO.nowHp;
         maxHp = playerDataSO.maxHp;
-        attackDamage = playerDataSO.attackDamage;
         basicAttack_velocityTimeWindow = playerDataSO.basicAttack_velocityTimeWindow;
         attackRadius = playerDataSO.attackRadius;
         attackAngle = playerDataSO.attackAngle;
@@ -168,12 +163,18 @@ public class Player : Entity
 
         agilityToCritChance=playerDataSO.agilityToCritChance;
         agilityToEvasion = playerDataSO.agilityToEvasion;
+        agilityToArmor=playerDataSO.agilityToArmor;
+
+        intelligenceToElementDamage=playerDataSO.intelligenceToElementDamage;
+        intelligenceToElementRes=playerDataSO.intelligenceToElementRes;
+
         maxEvasion = playerDataSO.maxEvasion;
         maxArmorMitigation = playerDataSO.maxArmorMitigation;
+        maxElementRes=playerDataSO.maxElementRes;
 
 
 
-        canDash = true;
+    canDash = true;
         isDead = false;
     }
 
@@ -260,15 +261,20 @@ public class Player : Entity
             return;
         }
 
-        //算上护甲减伤的伤害才是最终伤害 以及攻击者的破甲率
+        //算上护甲减伤的伤害 元素抗性的元素伤害 才是最终伤害
         float finalDamage = hitData.damage *
-    (1 - entity_Attribute.GetArmorMitigation(0, maxArmorMitigation, hitData.armorPenetration));
+    (1 - entity_Attribute.GetArmorMitigation(agilityToArmor, maxArmorMitigation, hitData.armorPenetration));
+
+        finalDamage += hitData.elementDamage * (1-entity_Attribute.GetElementRes(intelligenceToElementRes,hitData.elementType));
+        entity_Element.nowType=hitData.elementType;
+
         nowHp -= finalDamage;
 
         HurtData hurtData = new HurtData()
         {
             isCrit = hitData.isCrit,
             hurtEntity =this,
+            entity_Element=this.entity_Element,
         };
         //播放受伤/受击特效
         EventCenter.Instance.Broadcast<HurtData>(E_EventType.PlayerHurt, hurtData);
