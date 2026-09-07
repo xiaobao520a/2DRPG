@@ -167,8 +167,8 @@ public class VFXMgr : MonoBehaviour
     //播放元素特效(ice fire lightning)
     public void PlayElementVFX(HurtData hurtData)
     {
-        //没有元素组件 或 元素类型为none 就不播
-        if (hurtData.entity_Element == null || hurtData.entity_Element.nowType == E_ElementType.none) return;
+        //元素类型为none 就不播
+        if (hurtData.elementType == E_ElementType.none) return;
         if (hurtData.hurtEntity == null) return;
 
         SpriteRenderer sr = hurtData.hurtEntity.GetComponentInChildren<SpriteRenderer>();
@@ -179,15 +179,15 @@ public class VFXMgr : MonoBehaviour
 
         //记录原始颜色 播完恢复 而不是写死白色
         Color originalColor = sr.color;
-        elementVFXCoroutines[sr] = StartCoroutine(PlayElementVFX_Coroutine(sr, originalColor, hurtData.entity_Element));
+        elementVFXCoroutines[sr] = StartCoroutine(PlayElementVFX_Coroutine(sr, originalColor, hurtData.elementType,hurtData.elementDuration));
     }
 
     //播放元素特效的协程函数
-    private IEnumerator PlayElementVFX_Coroutine(SpriteRenderer sr, Color originalColor, Entity_Element entity_Element)
+    private IEnumerator PlayElementVFX_Coroutine(SpriteRenderer sr, Color originalColor, E_ElementType type,float duration)
     {
         try
         {
-            switch (entity_Element.nowType)
+            switch (type)
             {
                 case E_ElementType.ice:
                     Color lightColor = iceColor * 1.2f;
@@ -198,7 +198,7 @@ public class VFXMgr : MonoBehaviour
                     {
                         if (sr == null) yield break; //播放途中目标被销毁 直接结束
                         sr.color = (i == 0) ? lightColor : darkColor;
-                        yield return new WaitForSeconds(entity_Element.iceDuration / 2f);
+                        yield return new WaitForSeconds(duration / 2f);
                     }
 
                     //结束后恢复原来的颜色

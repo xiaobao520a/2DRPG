@@ -8,6 +8,7 @@ public struct AttackHitData
     public float damage; //物理伤害 箱子之类的可以忽略
     public float elementDamage; //元素伤害
     public E_ElementType elementType; //元素伤害的元素类型
+    public float elementDuration; //元素状态持续时间(如冰冻时长) 由攻击方配置
     public bool isCrit; //是否暴击
     public Vector2 knockBackForce; //击退力
     public float knockBackDirection; //1朝右击退 -1朝左击退

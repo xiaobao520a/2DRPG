@@ -266,7 +266,7 @@ public class Player : Entity
     (1 - entity_Attribute.GetArmorMitigation(agilityToArmor, maxArmorMitigation, hitData.armorPenetration));
 
         finalDamage += hitData.elementDamage * (1-entity_Attribute.GetElementRes(intelligenceToElementRes,hitData.elementType));
-        entity_Element.nowType=hitData.elementType;
+        entity_Element.type=hitData.elementType;
 
         nowHp -= finalDamage;
 
@@ -274,8 +274,15 @@ public class Player : Entity
         {
             isCrit = hitData.isCrit,
             hurtEntity =this,
-            entity_Element=this.entity_Element,
+            elementType = hitData.elementType,
+            elementDuration = hitData.elementDuration,
         };
+
+        //应用元素效果
+        if(entity_Element.type!=E_ElementType.none)
+
+        entity_Element.ApplyElementEffect(this,hitData.elementDuration);
+
         //播放受伤/受击特效
         EventCenter.Instance.Broadcast<HurtData>(E_EventType.PlayerHurt, hurtData);
 

@@ -10,7 +10,7 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver,IDamageable
 {
     //都存在的组件
     protected StateMachine stateMachine;
-    protected Animator animator;
+    public Animator animator;
     protected Rigidbody2D rb;
     public Entity_Attribute entity_Attribute;
     public Entity_Element entity_Element;

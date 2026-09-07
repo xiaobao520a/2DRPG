@@ -8,7 +8,10 @@ public class Entity_Element : MonoBehaviour
     [SerializeField] private ElementDataSO elementDataSo;
 
     //正处于的元素状态
-    public E_ElementType nowType;
+    public E_ElementType type;
+
+    //应用元素效果的协程
+    private Coroutine co_ApplyElementEffect;
 
     [Header("冰元素")]
     public float iceDuration; //持续时间
@@ -17,25 +20,52 @@ public class Entity_Element : MonoBehaviour
 
     private void Awake()
     {
-        iceDuration=elementDataSo.iceDuration;
+        co_ApplyElementEffect = null;
+
+        iceDuration = elementDataSo.iceDuration;
         slowDownMoveSpeed_Multiplier = elementDataSo.slowDownMoveSpeed_Multiplier;
         slowDownAnimationSpeed_Multiplier = elementDataSo.slowDownAnimationSpeed_Multiplier;
 
     }
 
     //应用元素效果 冰减速
-    public void ApplyElementEffect(HurtData hurtData)
+    public void ApplyElementEffect(Entity hurtEntity,float duration)
     {
-        float originalMoveSpeed = hurtData.hurtEntity.moveSpeed;
-        float originalBattleSpeed = 0;
+        if (co_ApplyElementEffect != null) return; //如果已经有元素效果了 直接return 或者改成
+        //同类型的元素效果return 如果是新的那就覆盖之类的 先保留
 
-        //减速
-        hurtData.hurtEntity.moveSpeed *= slowDownMoveSpeed_Multiplier;
-        if (hurtData.hurtEntity is Enemy)
+        //根据元素类型决定行为
+        switch (type)
         {
-            originalBattleSpeed = (hurtData.hurtEntity as Enemy).battleSpeed;
-            (hurtData.hurtEntity as Enemy).battleSpeed *= slowDownAnimationSpeed_Multiplier;
+            case E_ElementType.ice:
+            co_ApplyElementEffect = StartCoroutine(ApplyIceEffect_Coroutine(hurtEntity,duration));
+                break;
         }
+    }
+
+    private IEnumerator ApplyIceEffect_Coroutine(Entity hurtEntity,float duration)
+    {
+        float originalMoveSpeed = hurtEntity.moveSpeed;
+        float originalBattleSpeed = 0; //Enemy才有battleSpeed Player没有
+        float originalAnimatorSpeed = hurtEntity.animator.speed;
+
+        //减速 动画和移动速度
+        hurtEntity.moveSpeed *= slowDownMoveSpeed_Multiplier;
+        hurtEntity.animator.speed *= slowDownAnimationSpeed_Multiplier;
+
+        if (hurtEntity is Enemy)
+        {
+            originalBattleSpeed = (hurtEntity as Enemy).battleSpeed;
+            (hurtEntity as Enemy).battleSpeed *= slowDownAnimationSpeed_Multiplier;
+        }
+
+        yield return new WaitForSeconds(duration);
+        
+        //结束后恢复原本速度
+        hurtEntity.moveSpeed=originalMoveSpeed;
+        hurtEntity.animator.speed = originalAnimatorSpeed;
+        if (hurtEntity is Enemy) (hurtEntity as Enemy).battleSpeed = originalBattleSpeed;
+        co_ApplyElementEffect = null;
     }
 
 }
