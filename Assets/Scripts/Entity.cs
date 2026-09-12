@@ -87,6 +87,18 @@ public abstract class Entity:MonoBehaviour,IAnimationEventReceiver,IDamageable
     //死亡的方法
     public virtual void Die()
     {
+        if (isDead) return; //防重复调用(普攻致死后又吃灼烧跳之类)
+        isDead = true;
+        rb.velocity = Vector2.zero; //统一先停 敌人要弹跳的话由DieState的Enter覆盖
+    }
+
+    //减血方法
+    public virtual void ReduceHp(float damage)
+    {
+        if (isDead) return;
+
+        nowHp -= damage;
+        if (nowHp <= 0) Die();
     }
     protected virtual void DetectGround()
     {

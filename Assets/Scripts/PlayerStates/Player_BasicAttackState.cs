@@ -87,7 +87,8 @@ public class Player_BasicAttackState : PlayerState
 
                     elementDamage=player.entity_Attribute.GetElementDamage(player.intelligenceToElementDamage,out type),
                     elementType=type,
-                    elementDuration = type == E_ElementType.ice ? player.entity_Element.iceDuration : 0,
+                    elementDuration = player.entity_Element.GetElementDuration(type),
+
 
                     isCrit = isCrit,
                     knockBackForce = player.knockBackForce,

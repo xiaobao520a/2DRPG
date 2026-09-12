@@ -88,6 +88,7 @@ public abstract class Enemy : Entity,ICountered
     //敌人死亡的方法
     public override void Die()
     {
+        base.Die();
         stateMachine.ChangeState(dieState);
     }
 
@@ -111,8 +112,6 @@ public abstract class Enemy : Entity,ICountered
         finalDamage += hitData.elementDamage * (1 - entity_Attribute.GetElementRes(0,hitData.elementType));
         entity_Element.type = hitData.elementType;
 
-        nowHp -= finalDamage;
-
         HurtData hurtData = new HurtData()
         {
             isCrit = hitData.isCrit,
@@ -128,15 +127,9 @@ public abstract class Enemy : Entity,ICountered
         //播放受伤/受击特效
         EventCenter.Instance.Broadcast<HurtData>(E_EventType.EnemyHurt, hurtData);
 
-        if (nowHp <= 0)
-        {
-            Die();
-            return;
-        }
-
         rb.velocity = new Vector2(hitData.knockBackDirection * hitData.knockBackForce.x, hitData.knockBackForce.y);
 
-        
+        ReduceHp(finalDamage);
 
         //被攻击之后 如果并不处于战斗状态这之类的 就进入战斗battleState
         if (stateMachine.CurrentState!=attackState &&stateMachine.CurrentState!=battleState

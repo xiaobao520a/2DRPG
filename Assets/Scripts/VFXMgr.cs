@@ -6,7 +6,7 @@ using UnityEngine;
 public class VFXMgr : MonoBehaviour
 {
     private static VFXMgr instance;
-    public static VFXMgr Instance=>instance;
+    public static VFXMgr Instance => instance;
 
     private void Awake()
     {
@@ -67,7 +67,7 @@ public class VFXMgr : MonoBehaviour
     //收到伤害时的视觉特效材料
     [SerializeField] private Material onDamage_VFXMaterial;
     //伤害视觉持续时间
-    [SerializeField] private float onDamage_VFXDurationTime=0.2f;
+    [SerializeField] private float onDamage_VFXDurationTime = 0.2f;
 
     //正在闪烁的SpriteRenderer集合 每个渲染器独立闪烁 防止多目标同帧受击互相覆盖
     private HashSet<SpriteRenderer> flashingSet = new HashSet<SpriteRenderer>();
@@ -77,18 +77,20 @@ public class VFXMgr : MonoBehaviour
 
     [Header("命中特效")]
     [SerializeField] private GameObject VFX_Hit;
-    [SerializeField] private Color enemyHitColor= Color.yellow;
+    [SerializeField] private Color enemyHitColor = Color.yellow;
     [SerializeField] private Color playerHitColor = Color.gray;
 
     [Header("暴击特效")]
     [SerializeField] private GameObject VFX_CritHit;
-    [SerializeField] private Color CritColor=Color.red;
+    [SerializeField] private Color CritColor = Color.red;
 
     [Header("元素特效")]
+    [SerializeField] private ElementDataSO elementDataSo; //元素的基本数据
     [SerializeField] private Color iceColor = Color.cyan;
     //正在播放元素特效的渲染器 -> 协程 每个渲染器独立 防止多目标互相覆盖
     private Dictionary<SpriteRenderer, Coroutine> elementVFXCoroutines = new Dictionary<SpriteRenderer, Coroutine>();
 
+    [SerializeField] private Color fireColor = Color.red;
 
     //播放受伤时的视觉特效
     public void PlayDamageVFX(HurtData hurtData)
@@ -164,7 +166,7 @@ public class VFXMgr : MonoBehaviour
         }
     }
 
-    //播放元素特效(ice fire lightning)
+    //播放元素特效
     public void PlayElementVFX(HurtData hurtData)
     {
         //元素类型为none 就不播
@@ -177,36 +179,44 @@ public class VFXMgr : MonoBehaviour
         //这个渲染器正在播元素特效 忽略这次
         if (elementVFXCoroutines.ContainsKey(sr)) return;
 
-        //记录原始颜色 播完恢复 而不是写死白色
-        Color originalColor = sr.color;
-        elementVFXCoroutines[sr] = StartCoroutine(PlayElementVFX_Coroutine(sr, originalColor, hurtData.elementType,hurtData.elementDuration));
+        Color originalColor;
+
+        switch (hurtData.elementType)
+        {
+            case E_ElementType.ice:
+                //记录原始颜色 播完恢复 而不是写死白色
+                originalColor = sr.color;
+                elementVFXCoroutines[sr] = StartCoroutine(PlayIceVFX_Coroutine(sr, originalColor, hurtData.elementDuration));
+                break;
+
+            case E_ElementType.fire:
+                originalColor= sr.color;
+                elementVFXCoroutines[sr] = StartCoroutine(PlayFireVFX_Coroutine(sr,originalColor,hurtData.elementDuration,elementDataSo.burnTickInterval));
+                break;
+        }
     }
 
-    //播放元素特效的协程函数
-    private IEnumerator PlayElementVFX_Coroutine(SpriteRenderer sr, Color originalColor, E_ElementType type,float duration)
+    //播放冰特效的协程函数
+    private IEnumerator PlayIceVFX_Coroutine(SpriteRenderer sr, Color originalColor, float duration)
     {
         try
         {
-            switch (type)
+            Color lightColor = iceColor * 1.2f;
+            Color darkColor = iceColor * 0.8f;
+
+            //只切换一次颜色 从深色到浅色 持续时间是iceDuration的一半
+            for (int i = 0; i < 2; i++)
             {
-                case E_ElementType.ice:
-                    Color lightColor = iceColor * 1.2f;
-                    Color darkColor = iceColor * 0.8f;
-
-                    //只切换一次颜色 从深色到浅色 持续时间是iceDuration的一半
-                    for (int i = 0; i < 2; i++)
-                    {
-                        if (sr == null) yield break; //播放途中目标被销毁 直接结束
-                        sr.color = (i == 0) ? lightColor : darkColor;
-                        yield return new WaitForSeconds(duration / 2f);
-                    }
-
-                    //结束后恢复原来的颜色
-                    if (sr != null)
-                        sr.color = originalColor;
-                    break;
+                if (sr == null) yield break; //播放途中目标被销毁 直接结束
+                sr.color = (i == 0) ? lightColor : darkColor;
+                yield return new WaitForSeconds(duration / 2f);
             }
+
+            //结束后恢复原来的颜色
+            if (sr != null)
+                sr.color = originalColor;
         }
+
         finally
         {
             //无论正常结束还是目标销毁 都移除记录 防止卡死后续元素特效
@@ -214,4 +224,38 @@ public class VFXMgr : MonoBehaviour
         }
     }
 
-}
+    //播放火特效的协程函数
+    private IEnumerator PlayFireVFX_Coroutine(SpriteRenderer sr, Color originalColor, float duration,float tickInterval)
+    {
+        float timer = 0;
+        Color darkColor = fireColor * 0.7f;
+        try
+        {
+            while (timer < duration)
+            {
+                sr.color = fireColor;
+                yield return new WaitForSeconds(tickInterval*0.5f);
+                timer += tickInterval*0.5f;
+
+                sr.color = darkColor;
+                if (timer >= duration) break;
+
+                yield return new WaitForSeconds(tickInterval*0.5f);
+                timer += tickInterval*0.5f;
+            }
+
+            if (sr != null)
+                sr.color = originalColor;
+        }
+
+        finally
+        {
+            //无论正常结束还是目标销毁 都移除记录 防止卡死后续元素特效
+            elementVFXCoroutines.Remove(sr);
+        }
+
+    }
+
+
+    }
+

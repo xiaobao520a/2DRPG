@@ -7,22 +7,37 @@ using UnityEngine;
 [Serializable]
 public class Attribute
 {
-    [SerializeField] private float value; //数值
+    [SerializeField] private float value; //基础数值
+    [SerializeField] private float buffValue; //buff数值
+
+    public float Value => value+buffValue; //返回给外部的属性
 
     public Attribute()
     {
     }
-
     public Attribute(float initialValue)
     {
         value = initialValue;
     }
 
-    public float Value => value; //返回给外部的属性
-
-    //设置数值 运行时加点 Buff 用
+    //设置基础数值
     public void Set(float newValue)
     {
         value = newValue;
+    }
+
+    //添加buff
+    public void AddABuff(string name,E_AttributeType type,float value)
+    {
+
+    }
+
+    //删除Buff
+    public void RemoveBuff(string name)
+    {
+    }
+
+    public void ApplyBuff()
+    {
     }
 }

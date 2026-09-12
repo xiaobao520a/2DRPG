@@ -10,4 +10,9 @@ public class ElementDataSO : ScriptableObject
     public float iceDuration; //持续时间
     public float slowDownMoveSpeed_Multiplier; //减慢移动速度的乘数
     public float slowDownAnimationSpeed_Multiplier; //减慢动画速度的乘数
+
+    [Header("火元素")]
+    public float fireDuration; //持续时间
+    public float burnTickInterval; //每多少秒燃烧一次 造成一次伤害
+    public float burnTickDamage; //每次燃烧的伤害
 }

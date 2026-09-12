@@ -43,7 +43,7 @@ public class Enemy_AttackState : EnemyState
                         //ÔªËØÉËº¦
                         elementDamage = enemy.entity_Attribute.GetElementDamage(0, out type),
                         elementType = type,
-                        elementDuration = type == E_ElementType.ice ? enemy.entity_Element.iceDuration : 0,
+                        elementDuration = enemy.entity_Element.GetElementDuration(type),
 
                         isCrit = isCrit,
                         knockBackForce = enemy.knockBackForce,

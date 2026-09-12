@@ -18,6 +18,11 @@ public class Entity_Element : MonoBehaviour
     public float slowDownMoveSpeed_Multiplier; //减慢移动速度的乘数
     public float slowDownAnimationSpeed_Multiplier; //减慢动画速度的乘数
 
+    [Header("火元素")]
+    public float fireDuration; //持续时间
+    public float burnTickInterval; //每多少秒燃烧一次 造成一次伤害
+    public float burnTickDamage; //每次燃烧的伤害
+
     private void Awake()
     {
         co_ApplyElementEffect = null;
@@ -26,9 +31,23 @@ public class Entity_Element : MonoBehaviour
         slowDownMoveSpeed_Multiplier = elementDataSo.slowDownMoveSpeed_Multiplier;
         slowDownAnimationSpeed_Multiplier = elementDataSo.slowDownAnimationSpeed_Multiplier;
 
+        fireDuration = elementDataSo.fireDuration;
+        burnTickInterval= elementDataSo.burnTickInterval;
+        burnTickDamage= elementDataSo.burnTickDamage;
     }
 
-    //应用元素效果 冰减速
+    //得到每种元素效果的默认持续时间
+    public float GetElementDuration(E_ElementType elementType)
+    {
+        switch (elementType)
+        {
+            case E_ElementType.ice: return iceDuration;
+            case E_ElementType.fire: return fireDuration;
+            default: return 0f;
+        }
+    }
+
+    //应用元素效果 冰减速 火燃烧
     public void ApplyElementEffect(Entity hurtEntity,float duration)
     {
         if (co_ApplyElementEffect != null) return; //如果已经有元素效果了 直接return 或者改成
@@ -38,11 +57,16 @@ public class Entity_Element : MonoBehaviour
         switch (type)
         {
             case E_ElementType.ice:
-            co_ApplyElementEffect = StartCoroutine(ApplyIceEffect_Coroutine(hurtEntity,duration));
+                co_ApplyElementEffect = StartCoroutine(ApplyIceEffect_Coroutine(hurtEntity,duration));
+                break;
+
+            case E_ElementType.fire:
+                co_ApplyElementEffect = StartCoroutine(ApplyFireEffect_Coroutine(hurtEntity, duration,burnTickInterval,burnTickDamage));
                 break;
         }
     }
 
+    //冰冻
     private IEnumerator ApplyIceEffect_Coroutine(Entity hurtEntity,float duration)
     {
         float originalMoveSpeed = hurtEntity.moveSpeed;
@@ -68,4 +92,18 @@ public class Entity_Element : MonoBehaviour
         co_ApplyElementEffect = null;
     }
 
+    //燃烧
+    private IEnumerator ApplyFireEffect_Coroutine(Entity hurtEntity,float duration,float interval,float tickDamage)
+    {
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            hurtEntity.ReduceHp(tickDamage);
+            yield return new WaitForSeconds(interval);
+            timer += interval;
+        }
+
+        co_ApplyElementEffect=null;
+    }
 }

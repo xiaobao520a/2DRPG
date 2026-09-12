@@ -15,3 +15,6 @@ MonoBehaviour:
   iceDuration: 2
   slowDownMoveSpeed_Multiplier: 0.5
   slowDownAnimationSpeed_Multiplier: 0.5
+  fireDuration: 2
+  burnTickInterval: 0.5
+  burnTickDamage: 5

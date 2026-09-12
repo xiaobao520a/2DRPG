@@ -243,8 +243,7 @@ public class Player : Entity
     //Player死亡的方法
     public override void Die()
     {
-        isDead = true;
-        rb.velocity = Vector2.zero;
+        base.Die();
         stateMachine.ChangeState(DieState);
     }
 
@@ -268,34 +267,27 @@ public class Player : Entity
         finalDamage += hitData.elementDamage * (1-entity_Attribute.GetElementRes(intelligenceToElementRes,hitData.elementType));
         entity_Element.type=hitData.elementType;
 
-        nowHp -= finalDamage;
-
         HurtData hurtData = new HurtData()
         {
             isCrit = hitData.isCrit,
             hurtEntity =this,
             elementType = hitData.elementType,
-            elementDuration = hitData.elementDuration,
+            elementDuration =hitData.elementDuration,
         };
 
         //应用元素效果
         if(entity_Element.type!=E_ElementType.none)
-
         entity_Element.ApplyElementEffect(this,hitData.elementDuration);
 
         //播放受伤/受击特效
         EventCenter.Instance.Broadcast<HurtData>(E_EventType.PlayerHurt, hurtData);
 
-        if (nowHp <= 0)
-        {
-            Die();
-            return;
-        }
         //击退方向由攻击方决定（knockBackDirection: 1=向右 -1=向左），只翻转X，保持Y不变
         rb.velocity = new Vector2(hitData.knockBackDirection * hitData.knockBackForce.x, hitData.knockBackForce.y);
 
-        
-        
+        //减血
+        ReduceHp(finalDamage);
+
     }
 
     //Player是否闪避了攻击

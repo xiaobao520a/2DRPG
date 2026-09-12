@@ -385,7 +385,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf32a4a207db5ce48bc7370612b2000c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   entity_Attribute: {fileID: 0}
+  entity_Element: {fileID: 0}
   moveSpeed: 5
   isRight: 1
   isGround: 0
@@ -461,38 +463,54 @@ MonoBehaviour:
   majorGroup:
     strength:
       value: 0
+      buffValue: 0
     agility:
       value: 0
+      buffValue: 0
     intelligence:
       value: 0
+      buffValue: 0
     vitality:
       value: 0
+      buffValue: 0
   attackGroup:
     damage:
       value: 0
+      buffValue: 0
     critPower:
       value: 0
+      buffValue: 0
     critChance:
       value: 0
+      buffValue: 0
     armorPenetration:
       value: 0
+      buffValue: 0
     fireDamage:
       value: 0
+      buffValue: 0
     iceDamage:
       value: 0
+      buffValue: 0
     lightningDamage:
       value: 0
+      buffValue: 0
   defenseGroup:
     armor:
       value: 0
+      buffValue: 0
     evasion:
       value: 0
+      buffValue: 0
     fireRes:
       value: 0
+      buffValue: 0
     iceRes:
       value: 0
+      buffValue: 0
     lightningRes:
       value: 0
+      buffValue: 0
 --- !u!114 &153170409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,9 +524,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementDataSo: {fileID: 11400000, guid: 304153af95044fd42a9bbdecb875db5f, type: 2}
+  type: 0
   iceDuration: 0
   slowDownMoveSpeed_Multiplier: 0
   slowDownAnimationSpeed_Multiplier: 0
+  fireDuration: 0
+  burnTickInterval: 0
+  burnTickDamage: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +656,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c76a40568c7ce4293641e02a75fb3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   entity_Attribute: {fileID: 0}
+  entity_Element: {fileID: 0}
   moveSpeed: 5
   isRight: 1
   isGround: 0
@@ -766,38 +790,54 @@ MonoBehaviour:
   majorGroup:
     strength:
       value: 0
+      buffValue: 0
     agility:
       value: 0
+      buffValue: 0
     intelligence:
       value: 0
+      buffValue: 0
     vitality:
       value: 0
+      buffValue: 0
   attackGroup:
     damage:
       value: 10
+      buffValue: 0
     critPower:
       value: 150
+      buffValue: 0
     critChance:
       value: 5
+      buffValue: 0
     armorPenetration:
       value: 0
+      buffValue: 0
     fireDamage:
-      value: 0
+      value: 5
+      buffValue: 0
     iceDamage:
       value: 0
+      buffValue: 0
     lightningDamage:
       value: 0
+      buffValue: 0
   defenseGroup:
     armor:
       value: 0
+      buffValue: 0
     evasion:
       value: 1000
+      buffValue: 0
     fireRes:
       value: 0
+      buffValue: 0
     iceRes:
       value: 0
+      buffValue: 0
     lightningRes:
       value: 0
+      buffValue: 0
 --- !u!114 &535843905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,9 +851,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementDataSo: {fileID: 11400000, guid: 304153af95044fd42a9bbdecb875db5f, type: 2}
+  type: 0
   iceDuration: 0
   slowDownMoveSpeed_Multiplier: 0
   slowDownAnimationSpeed_Multiplier: 0
+  fireDuration: 0
+  burnTickInterval: 0
+  burnTickDamage: 0
 --- !u!1 &737130842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,7 +1526,9 @@ MonoBehaviour:
   playerHitColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   VFX_CritHit: {fileID: 5181822293819917058, guid: ec3841005e8781c47a543277abaed28a, type: 3}
   CritColor: {r: 1, g: 0, b: 0, a: 1}
+  elementDataSo: {fileID: 11400000, guid: 304153af95044fd42a9bbdecb875db5f, type: 2}
   iceColor: {r: 0, g: 1, b: 1, a: 1}
+  fireColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &1600532708
 Transform:
   m_ObjectHideFlags: 0
