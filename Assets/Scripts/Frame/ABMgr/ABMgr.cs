@@ -6,18 +6,8 @@ using UnityEngine.Events;
 /// <summary>
 /// AB包管理器 管理资源的加载 卸载等
 /// </summary>
-public class ABMgr:MonoBehaviour
+public class ABMgr:Singleton_WithMono<ABMgr>
 {
-    private static ABMgr instance;
-    public static ABMgr Instance=>instance;
-
-    private void Awake()
-    {
-        if(instance == null)
-            instance = this;
-    }
-
-
     //ab包字典 因为ab包只能加载一次 防止多次加载报错 记录已经加载过的ab包
     private Dictionary<string,AssetBundle>abDic= new Dictionary<string,AssetBundle>();
 
@@ -54,7 +44,7 @@ public class ABMgr:MonoBehaviour
     /// <param name="abName"></param>
     /// <param name="resName"></param>
     /// <param name="callBack"></param>
-    /// <param name="isAsync"></param>
+    /// <param name="isAsync">是否同步加载资源</param>
     public void LoadRes(string abName,string resName,UnityAction<Object> callBack,bool isSync=false)
     {
         StartCoroutine(Co_LoadRes(abName,resName,callBack,isSync,null));
